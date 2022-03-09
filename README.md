@@ -1,5 +1,4 @@
-# Team Name
-Dark Skies
+# Dark Skies
 
 ### Team Members
 Aileen Clarke
