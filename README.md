@@ -50,7 +50,7 @@ Juno is then taken back to the U.S. view. The sources of light pollution vanish,
 | 6 | Distance Filter Slider | Filter: Object and location. Present user with an option to narrow their search. A slider for adjusting distance parameter.  |
 | 7 | Reset Button | Reexpress: Object. Allow user to reset slippy map to full extent of US after search by clicking a button. |
 
-#### Wireframs
+#### Wireframes
 
 This is the most complete and up to date wireframe for the final interactive portion of the story. 
 ![Main Wireframe](img/main-wireframe.jpg)
