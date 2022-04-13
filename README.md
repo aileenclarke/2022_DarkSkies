@@ -2,7 +2,7 @@
 
 ### Team Members
 Aileen Clarke
-Austin Novak
+Austin J Novak
 Jake Steinberg
 
 ### Project Proposal
