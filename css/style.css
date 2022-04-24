@@ -1,1 +1,9 @@
 /*insert style here*/
+body {
+    margin: 0;
+}
+
+#map {
+	height: 400px;
+	width: 100%;
+}
