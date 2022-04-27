@@ -1,9 +1,27 @@
 /*insert style here*/
-body {
-    margin: 0;
+
+body,html {
+	margin: 0;
 }
+
 
 #map {
 	height: 400px;
 	width: 100%;
+}
+
+.background{
+	width: 100vw;
+	height: 100vh;
+}
+
+.title{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+h1{
+	font-size: 100px;
 }

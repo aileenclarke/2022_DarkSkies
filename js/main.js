@@ -10,7 +10,9 @@ function createMap(){
         zoom: 4
     });
     */
-    map = L.map('map').setView([39,-98],4);
+    map = L.map('map',{
+        scrollWheelZoom: false})
+        .setView([39,-98],4);
 
     // mapbox layer 1
     var layer1 = L.tileLayer('https://api.mapbox.com/styles/v1/amclarke2/cl0g3m8oh000h14n0ok1oan43/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYW1jbGFya2UyIiwiYSI6ImNrczZtNjkwdjAwZngycW56YW56cHUxaGsifQ._Cc2V5nKC5p2zfrYqw7Aww', { 
@@ -26,6 +28,7 @@ function createMap(){
     L.control.sideBySide(layer1, layer2).addTo(map);
 };
 
+
 document.getElementById("buttonND").addEventListener("click", function () {
     map.flyTo([48.15, -103.62], 10, {
         animate: true,
@@ -40,5 +43,10 @@ document.getElementById("buttonTX").addEventListener("click", function () {
     });
 });
 
-https://api.mapbox.com/styles/v1/amclarke2/cl2dhi5fc003q14o3jz96d8dp.html?title=view&access_token=pk.eyJ1IjoiYW1jbGFya2UyIiwiYSI6ImNrczZtNjkwdjAwZngycW56YW56cHUxaGsifQ._Cc2V5nKC5p2zfrYqw7Aww&zoomwheel=true&fresh=true#9/37.78/-122.4241
+function scroll(){
+    console.log("hello")
+}
+
+
 document.addEventListener('DOMContentLoaded',createMap)
+document.addEventListener('scroll',scroll)
