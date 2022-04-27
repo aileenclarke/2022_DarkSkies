@@ -43,10 +43,47 @@ document.getElementById("buttonTX").addEventListener("click", function () {
     });
 });
 
-function scroll(){
-    console.log("hello")
+//var pos = document.querySelector("#block1").getBoundingClientRect()
+
+//console.log(pos)
+
+function isInPosition(){
+    
+    var block1 = document.getElementById("block1");
+    var rect = block1.getBoundingClientRect();
+    //var innerHeight = window.innerHeight;
+    x = rect.left;
+    y = rect.top;
+    w = rect.width;
+    h = rect.height;
+    console.log(y)
+    console.log(innerHeight)
+    var position1 = y / window.innerHeight
+    console.log(position1)
+
+    if (position1 >= .4 && position1 <= .42){
+        map.flyTo([48.15, -103.62], 10, {
+            animate: true,
+            duration: 2 // in seconds
+        });
+    }
 }
 
 
+/*
+function scroll(){
+    var pos = document.querySelector("#block1").getBoundingClientRect()
+    console.log(pos)
+    if (pos > 298){
+        map.flyTo([48.15, -103.62], 10, {
+            animate: true,
+            duration: 2 // in seconds
+        });
+    }
+}
+*/
+
+
+
 document.addEventListener('DOMContentLoaded',createMap)
-document.addEventListener('scroll',scroll)
+document.addEventListener('scroll',isInPosition)

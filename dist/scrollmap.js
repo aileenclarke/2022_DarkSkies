@@ -44,8 +44,7 @@
 
             var height = div.clientHeight,
                 pHeight = div.parentNode.clientHeight;
-                            console.log((pHeight/2) - (height/2) + "px")
-
+                           // console.log((pHeight/2) - (height/2) + "px")
             div.style.top = (pHeight/2) - (height/2) + "px";
         });
     }
