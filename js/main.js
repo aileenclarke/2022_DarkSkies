@@ -126,12 +126,13 @@ function createFinalMap(){
     L.control.zoom({position:'topright'}).addTo(finalMap);
 
     //add the basemap.
-    var CartoDB_DarkMatterNoLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
 	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 	    subdomains: 'abcd',
     }).addTo(finalMap);
 };
 
 
-document.addEventListener('DOMContentLoaded', createSliderMap, createFinalMap)
+document.addEventListener('DOMContentLoaded', createSliderMap)
+document.addEventListener('DOMContentLoaded', createFinalMap)
 document.addEventListener('scroll', scroll)
