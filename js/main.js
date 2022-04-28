@@ -3,6 +3,9 @@
 // leaflet side-by-side
 var sliderMap;
 
+//Explorable Leaflet map at the end.
+var finalMap;
+
 function createSliderMap(){
     /*
     map = L.map('map', {
@@ -101,7 +104,34 @@ function scroll(){
 }
 */
 
+//Explorable Leaflet map
+
+function createFinalMap(){
+    //create the map
+    finalMap = L.map('finalMap', {
+        //map parameters
+        center: [20, 40],
+        zoom: 4,
+        maxZoom: 7,
+        minZoom: 4,
+        //needed to get rid zoom in order to move it 
+        zoomControl:false,
+        //constrain pan to data
+        maxBounds: [
+            [65, -40],
+            [-50, 120]
+            ]
+    });
+    //adds zoom buttons back to top right
+    L.control.zoom({position:'topright'}).addTo(map);
+
+    //add the basemap.
+    var CartoDB_DarkMatterNoLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+	    subdomains: 'abcd',
+    }).addTo(map);
+};
 
 
-document.addEventListener('DOMContentLoaded', createSliderMap)
+document.addEventListener('DOMContentLoaded', createSliderMap, createFinalMap)
 document.addEventListener('scroll', scroll)

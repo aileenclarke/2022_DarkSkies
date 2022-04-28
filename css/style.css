@@ -10,6 +10,11 @@ body,html {
 	width: 100%;
 }
 
+#finalMap {
+	height: 400px;
+	width: 100%;
+}
+
 .background{
 	width: 100vw;
 	height: 100vh;
