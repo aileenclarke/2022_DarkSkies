@@ -11,8 +11,12 @@ body,html {
 }
 
 #finalMap {
-	height: 400px;
-	width: 100%;
+	width: 90vw;
+	height: 80vh;
+	/*z-index important for drawing order, 0 puts map on bottom*/
+	z-index: 0;
+	margin-left: 5%;
+	margin-bottom: 5%;
 }
 
 .background{

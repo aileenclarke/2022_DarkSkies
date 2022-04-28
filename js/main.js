@@ -110,20 +110,20 @@ function createFinalMap(){
     //create the map
     finalMap = L.map('finalMap', {
         //map parameters
-        center: [20, 40],
+        center: [39,-98],
         zoom: 4,
-        maxZoom: 7,
+        maxZoom: 12,
         minZoom: 4,
         //needed to get rid zoom in order to move it 
         zoomControl:false,
         //constrain pan to data
         maxBounds: [
-            [65, -40],
-            [-50, 120]
+            [60, -155],
+            [15, -45]
             ]
     });
     //adds zoom buttons back to top right
-    L.control.zoom({position:'topright'}).addTo(finalMap);
+    L.control.zoom({position:'topleft'}).addTo(finalMap);
 
     //add the basemap.
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
