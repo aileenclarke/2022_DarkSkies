@@ -31,7 +31,7 @@ function createSliderMap(){
     L.control.sideBySide(layer1, layer2).addTo(sliderMap);
 };
 
-
+/*
 document.getElementById("buttonND").addEventListener("click", function () {
     sliderMap.flyTo([48.15, -103.62], 10, {
         animate: true,
@@ -45,7 +45,7 @@ document.getElementById("buttonTX").addEventListener("click", function () {
         duration: 2 // in seconds
     });
 });
-
+*/
 //var pos = document.querySelector("#block1").getBoundingClientRect()
 
 //console.log(pos)
@@ -123,13 +123,13 @@ function createFinalMap(){
             ]
     });
     //adds zoom buttons back to top right
-    L.control.zoom({position:'topright'}).addTo(map);
+    L.control.zoom({position:'topright'}).addTo(finalMap);
 
     //add the basemap.
     var CartoDB_DarkMatterNoLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
 	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 	    subdomains: 'abcd',
-    }).addTo(map);
+    }).addTo(finalMap);
 };
 
 
