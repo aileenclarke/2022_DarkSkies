@@ -46,10 +46,26 @@ document.getElementById("buttonTX").addEventListener("click", function () {
 //var pos = document.querySelector("#block1").getBoundingClientRect()
 
 //console.log(pos)
+var fly= [
+    {
+        id:"block1",
+        location:[48.15, -103.62]
+    },
+    {
+        id:"block2",
+        location:[30.27, -97.74]
+    }
+]
 
-function isInPosition(){
+function scroll(){
+    fly.forEach(function(item){
+        isInPosition(item.id, item.location)
+    })
+}
+
+function isInPosition(id, location){
     
-    var block1 = document.getElementById("block1");
+    var block1 = document.getElementById(id);
     var rect = block1.getBoundingClientRect();
     //var innerHeight = window.innerHeight;
     x = rect.left;
@@ -58,11 +74,13 @@ function isInPosition(){
     h = rect.height;
     //console.log(y)
     //console.log(innerHeight)
-    var position1 = y / window.innerHeight
+    var position1 = y
     //console.log(position1)
+    var scrollPos = document.querySelector("html").scrollTop,
+        topMargin = window.innerHeight / 2;
 
-    if (position1 >= .4 && position1 <= .42){
-        sliderMap.flyTo([48.15, -103.62], 10, {
+    if ((y-topMargin) < 0 && y >0){
+        sliderMap.flyTo(location, 10, {
             animate: true,
             duration: 2 // in seconds
         });
@@ -86,4 +104,4 @@ function scroll(){
 
 
 document.addEventListener('DOMContentLoaded', createSliderMap)
-document.addEventListener('scroll', isInPosition)
+document.addEventListener('scroll', scroll)
