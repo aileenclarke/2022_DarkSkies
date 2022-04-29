@@ -30,23 +30,30 @@ function createSliderMap(){
 // create array containing flyTo locations
 var fly= [
     {
+        id:"start",
+        location:[39,-98],
+        zoom: 4
+    },
+    {
         id:"block1",
-        location:[48.15, -103.62]
+        location:[48.15, -103.62],
+        zoom: 8
     },
     {
         id:"block2",
-        location:[30.27, -97.74]
+        location:[30.27, -97.74],
+        zoom: 8
     }
 ]
 
 // function to trigger flyTo on scroll
 function scroll(){
     fly.forEach(function(item){
-        isInPosition(item.id, item.location)
+        isInPosition(item.id, item.location, item.zoom)
     })
 }
 
-function isInPosition(id, location){
+function isInPosition(id, location, zoom){
     
     // get element and element's property 'top'
     var block1 = document.getElementById(id);
@@ -58,7 +65,7 @@ function isInPosition(id, location){
 
     // call flyTo when top of element is halfway up innerHeight
     if ((y-topMargin) < 0 && y > 0){
-        sliderMap.flyTo(location, 10, {
+        sliderMap.flyTo(location, zoom, {
             animate: true,
             duration: 2 // in seconds
         });
