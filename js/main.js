@@ -130,7 +130,33 @@ function createFinalMap(){
 	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 	    subdomains: 'abcd',
     }).addTo(finalMap);
+
+    //call getData function
+    getData();
 };
+
+//function to retrieve the data
+function getData(){
+    //adds the IDA points layer
+    fetch("data/IDApointsNA.geojson")
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(json){
+            loadRange(json)
+    });
+};
+
+//add the data to the map
+function loadRange(data){
+    //create a Leaflet GeoJSON layer and add it to the map
+    L.geoJson(data, {
+       color: "#000",
+       weight: 0,
+       opacity: 1,
+    }).addTo(finalMap);
+};
+
 
 
 document.addEventListener('DOMContentLoaded', createSliderMap)
