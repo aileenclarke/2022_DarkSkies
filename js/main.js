@@ -6,13 +6,9 @@ var sliderMap;
 //Explorable Leaflet map at the end.
 var finalMap;
 
+// function to create Slider map
 function createSliderMap(){
-    /*
-    map = L.map('map', {
-        center:[39.83,-98.58],
-        zoom: 4
-    });
-    */
+
     sliderMap = L.map('sliderMap',{
         scrollWheelZoom: false})
         .setView([39,-98],4);
@@ -31,24 +27,7 @@ function createSliderMap(){
     L.control.sideBySide(layer1, layer2).addTo(sliderMap);
 };
 
-/*
-document.getElementById("buttonND").addEventListener("click", function () {
-    sliderMap.flyTo([48.15, -103.62], 10, {
-        animate: true,
-        duration: 2 // in seconds
-    });
-});
-
-document.getElementById("buttonTX").addEventListener("click", function () {
-    sliderMap.flyTo([30.27, -97.74], 10, {
-        animate: true,
-        duration: 2 // in seconds
-    });
-});
-*/
-//var pos = document.querySelector("#block1").getBoundingClientRect()
-
-//console.log(pos)
+// create array containing flyTo locations
 var fly= [
     {
         id:"block1",
@@ -60,6 +39,7 @@ var fly= [
     }
 ]
 
+// function to trigger flyTo on scroll
 function scroll(){
     fly.forEach(function(item){
         isInPosition(item.id, item.location)
@@ -68,21 +48,16 @@ function scroll(){
 
 function isInPosition(id, location){
     
+    // get element and element's property 'top'
     var block1 = document.getElementById(id);
     var rect = block1.getBoundingClientRect();
-    //var innerHeight = window.innerHeight;
-    x = rect.left;
     y = rect.top;
-    w = rect.width;
-    h = rect.height;
-    //console.log(y)
-    //console.log(innerHeight)
-    var position1 = y
-    //console.log(position1)
-    var scrollPos = document.querySelector("html").scrollTop,
-        topMargin = window.innerHeight / 2;
 
-    if ((y-topMargin) < 0 && y >0){
+    // set the top margin as a ratio of innerHeight
+    var topMargin = window.innerHeight / 2;
+
+    // call flyTo when top of element is halfway up innerHeight
+    if ((y-topMargin) < 0 && y > 0){
         sliderMap.flyTo(location, 10, {
             animate: true,
             duration: 2 // in seconds
@@ -90,19 +65,35 @@ function isInPosition(id, location){
     }
 }
 
+// first attempt at function to trigger fade on scroll
+function scrollFade(){
+    
+    // get element and element's property 'top'
+    var imageFade = document.getElementById("imageFade");
+    var rect = imageFade.getBoundingClientRect();
+    y = rect.top;
+    
+    // set the top margin as a ratio of innerHeight
+    var topMargin = window.innerHeight / 4;
 
-/*
-function scroll(){
-    var pos = document.querySelector("#block1").getBoundingClientRect()
-    console.log(pos)
-    if (pos > 298){
-        map.flyTo([48.15, -103.62], 10, {
-            animate: true,
-            duration: 2 // in seconds
-        });
-    }
+    // element height
+    var elementHeight = imageFade.offsetHeight;
+
+    // number of px the element is scrolled vertically
+    var scrollTop = document.documentElement.scrollTop;
+    
+    //initialize opacity
+    var opacity = 1;
+    
+    // if scrollTop > topMargin, start fading out
+    if (scrollTop > topMargin) {
+          opacity = 1 - (scrollTop - topMargin) / elementHeight;
+      }
+    if (opacity >= 0) {
+        imageFade.style.opacity = opacity;
+      }
 }
-*/
+
 
 //Explorable Leaflet map
 
@@ -162,3 +153,4 @@ function loadRange(data){
 document.addEventListener('DOMContentLoaded', createSliderMap)
 document.addEventListener('DOMContentLoaded', createFinalMap)
 document.addEventListener('scroll', scroll)
+document.addEventListener('scroll', scrollFade)
