@@ -1,10 +1,83 @@
 //insert code here!
 
+// locator map
+var locationMap;
+
 // leaflet side-by-side
 var sliderMap;
 
 //Explorable Leaflet map at the end.
 var finalMap;
+
+// function to create location map
+function createLocationMap(){
+    locationMap = L.map('locationMap',{
+        scrollWheelZoom: false})
+        .setView([39,-98],4); 
+
+    //adds zoom buttons back to top left
+    L.control.zoom({position:'topleft'}).addTo(locationMap);
+
+    //add the basemap.
+    L.tileLayer('https://api.mapbox.com/styles/v1/ajnovak/cl2grbrgj003o14mot9tnmwh1/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWpub3ZhayIsImEiOiJja2dnMWJoYXkwd3hlMnlsN241MHU3aTdyIn0.YlwTqHjnT8sUrhr8vtkWjg', {
+	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+	    subdomains: 'abcd',
+    }).addTo(locationMap);    
+}
+
+/*
+var location = [
+    {
+        id: userLoc,
+        location:[position.coords.latitude, item.coords.longitude],
+        zoom: 14
+    },
+    {
+        id: userCity,
+        location:[item.coords.latitude, item.coords.longitude],
+        zoom: 8
+    },
+    {
+        id: US,
+        location:[39,-98],
+        zoom: 4,
+    }
+]
+*/
+
+// function to trigger location prompt
+function scrollLocation(){
+    
+    /*
+    navigator.geolocation.getCurrentPosition(function(item) {
+        yourFunction(item.coords.latitude, item.coords.longitude);
+    });
+    location.forEach(function(item){
+        locatorIsInPosition(item.id, item.location, item.zoom)
+    })
+    */
+}
+/*
+function locatorIsInPosition(id, location, zoom){
+    
+    // get element and element's property 'top'
+    var locText = document.getElementById(id);
+    var rect = locText.getBoundingClientRect();
+    y = rect.top;
+
+    // set the top margin as a ratio of innerHeight
+    var topMargin = window.innerHeight / 2;
+
+    // call flyTo when top of element is halfway up innerHeight
+    if ((y-topMargin) < 0 && y > 0){
+        locationMap.flyTo(location, zoom, {
+            animate: true,
+            duration: 2 // in seconds
+        });
+    }
+}
+*/
+
 
 // function to create Slider map
 function createSliderMap(){
@@ -26,6 +99,7 @@ function createSliderMap(){
     // compare two layers on map
     L.control.sideBySide(layer1, layer2).addTo(sliderMap);
 };
+
 
 // create array containing flyTo locations
 var fly= [
@@ -72,7 +146,7 @@ function isInPosition(id, location, zoom){
     }
 }
 
-// first attempt at function to trigger fade on scroll
+// function to trigger fade on scroll
 function scrollFade(){
     
     // get element and element's property 'top'
@@ -120,7 +194,7 @@ function createFinalMap(){
             [15, -45]
             ]
     });
-    //adds zoom buttons back to top right
+    //adds zoom buttons back to top left
     L.control.zoom({position:'topleft'}).addTo(finalMap);
 
     //add the basemap.
@@ -178,6 +252,7 @@ function createYearLegend(){
     finalMap.addControl(new LegendControl());
 };
 
+<<<<<<< Updated upstream
 /*
 function sequencePoints(data){
     finalMap.eachLayer(function(layer){
@@ -190,7 +265,11 @@ function sequencePoints(data){
 };
 */
 
+=======
+document.addEventListener('DOMContentLoaded', createLocationMap)
+>>>>>>> Stashed changes
 document.addEventListener('DOMContentLoaded', createSliderMap)
 document.addEventListener('DOMContentLoaded', createFinalMap)
 document.addEventListener('scroll', scroll)
 document.addEventListener('scroll', scrollFade)
+document.addEventListener('scroll', scrollLocation)
