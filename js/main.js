@@ -252,7 +252,6 @@ function createYearLegend(){
     finalMap.addControl(new LegendControl());
 };
 
-<<<<<<< Updated upstream
 /*
 function sequencePoints(data){
     finalMap.eachLayer(function(layer){
@@ -265,9 +264,7 @@ function sequencePoints(data){
 };
 */
 
-=======
 document.addEventListener('DOMContentLoaded', createLocationMap)
->>>>>>> Stashed changes
 document.addEventListener('DOMContentLoaded', createSliderMap)
 document.addEventListener('DOMContentLoaded', createFinalMap)
 document.addEventListener('scroll', scroll)
