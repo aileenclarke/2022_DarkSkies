@@ -111,6 +111,7 @@ function createFinalMap(){
         zoom: 4,
         maxZoom: 12,
         minZoom: 4,
+        scrollWheelZoom: false,
         //needed to get rid zoom in order to move it 
         zoomControl:false,
         //constrain pan to data
