@@ -139,23 +139,25 @@ function getData(){
     fetch("data/IDApointsNA.geojson")
         .then(function(response){
             return response.json();
-        })
+        })        
         .then(function(json){
-            loadRange(json)
-    });
+            //create a Leaflet GeoJSON layer and add it to the map
+            L.geoJson(json,{
+                onEachFeature:function(feature, layer){
+                    var popupContent = createPopupContent(feature);
+                    
+                    layer.bindPopup(popupContent)
+                }
+            }).addTo(finalMap);
+        });
 };
 
-//add the data to the map
-function loadRange(data){
-    //create a Leaflet GeoJSON layer and add it to the map
-    L.geoJson(data, {
-       color: "#000",
-       weight: 0,
-       opacity: 1,
-    }).addTo(finalMap);
+function createPopupContent(feature){
+    var popupContent = "<p><b>Name:</b> " + feature.properties.Name + 
+        "</p><p><b>Year designated:</b> " + feature.properties.Year + 
+        "</p><p><b>Type:</b> " + feature.properties.Type;
+    return popupContent
 };
-
-
 
 document.addEventListener('DOMContentLoaded', createSliderMap)
 document.addEventListener('DOMContentLoaded', createFinalMap)
