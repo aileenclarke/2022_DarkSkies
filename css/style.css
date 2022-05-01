@@ -19,6 +19,20 @@ body,html {
 	margin-bottom: 5%;
 }
 
+.legend-year {
+	width: 40px;
+	height: 20px;
+	font-weight: bold;
+	font-size: large;
+	background-color: rgba(255,255,255,0.8);
+	padding: 10px;
+	border: solid gray 1px;
+}
+
+.yearLegend {
+	margin-top: 0px !important;
+}
+
 .backgroundRow{
 	margin-bottom:50%;
 }

@@ -101,7 +101,6 @@ function scrollFade(){
       }
 }
 
-
 //Explorable Leaflet map
 
 function createFinalMap(){
@@ -145,10 +144,11 @@ function getData(){
             L.geoJson(json,{
                 onEachFeature:function(feature, layer){
                     var popupContent = createPopupContent(feature);
-                    
                     layer.bindPopup(popupContent)
                 }
             }).addTo(finalMap);
+            createYearLegend();
+            //sequencePoints(json);
         });
 };
 
@@ -158,6 +158,36 @@ function createPopupContent(feature){
         "</p><p><b>Type:</b> " + feature.properties.Type;
     return popupContent
 };
+
+function createYearLegend(){
+    var LegendControl = L.Control.extend({
+        options: {
+            position: 'bottomleft'
+        },
+        onAdd: function () {
+            // create the control container with a particular class name
+            var container = L.DomUtil.create('div', 'legend-year');
+            
+            //legend title
+            container.innerHTML = '<p class="yearLegend">2007</span></p>';
+
+            return container;
+        }
+    });
+    finalMap.addControl(new LegendControl());
+};
+
+/*
+function sequencePoints(data){
+    finalMap.eachLayer(function(layer){
+        layer.filter(function(){
+            if (data.properties.Year == 2001){
+                return true;
+            }
+        })
+    });
+};
+*/
 
 document.addEventListener('DOMContentLoaded', createSliderMap)
 document.addEventListener('DOMContentLoaded', createFinalMap)
