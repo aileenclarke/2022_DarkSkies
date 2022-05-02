@@ -9,13 +9,15 @@ var sliderMap;
 //Explorable Leaflet map at the end.
 var finalMap;
 
-// function to create location map
+//LOCATION MAP
+
+// create location map
 function createLocationMap(){
     locationMap = L.map('locationMap',{
         scrollWheelZoom: false})
         .setView([39,-98],4); 
 
-    //adds zoom buttons back to top left
+    //adds zoom buttons to top left
     L.control.zoom({position:'topleft'}).addTo(locationMap);
 
     //add the basemap.
@@ -25,39 +27,55 @@ function createLocationMap(){
     }).addTo(locationMap);    
 }
 
-/*
-var location = [
-    {
-        id: userLoc,
-        location:[position.coords.latitude, item.coords.longitude],
-        zoom: 14
-    },
-    {
-        id: userCity,
-        location:[item.coords.latitude, item.coords.longitude],
-        zoom: 8
-    },
-    {
-        id: US,
-        location:[39,-98],
-        zoom: 4,
-    }
-]
-*/
+// get user location
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(saveLocation);
+  } else { 
+    var lat = 39;
+    var long = 105;
+    createArray();
+    scrollLocation();
+  }
+}
+
+function saveLocation(position) {
+  var lat = position.coords.latitude;
+  var long = position.coords.longitude;
+  console.log(lat, long)
+  createArray()
+  scrollLocation();
+}
+
+// array containing locations
+function createArray(){
+    var locations = [
+        {
+            id: userLoc,
+            location:[lat, long],
+            zoom: 14
+        },
+        {
+            id: userCity,
+            location:[lat, long],
+            zoom: 8
+        },
+        {
+            id: US,
+            location:[39,-98],
+            zoom: 4,
+        }
+    ]
+    return locations
+}
 
 // function to trigger location prompt
 function scrollLocation(){
-    
-    /*
-    navigator.geolocation.getCurrentPosition(function(item) {
-        yourFunction(item.coords.latitude, item.coords.longitude);
-    });
-    location.forEach(function(item){
+    locations.forEach(function(item){
         locatorIsInPosition(item.id, item.location, item.zoom)
     })
-    */
 }
-/*
+
 function locatorIsInPosition(id, location, zoom){
     
     // get element and element's property 'top'
@@ -76,8 +94,8 @@ function locatorIsInPosition(id, location, zoom){
         });
     }
 }
-*/
 
+// SLIDER MAP
 
 // function to create Slider map
 function createSliderMap(){
@@ -145,6 +163,8 @@ function isInPosition(id, location, zoom){
         });
     }
 }
+
+// IMAGE FADE
 
 // function to trigger fade on scroll
 function scrollFade(){
