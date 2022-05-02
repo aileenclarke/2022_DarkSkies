@@ -1,4 +1,7 @@
 /*insert style here*/
+html {
+	background-color: #0c1427;
+}
 
 body,html {
 	margin: 0;
@@ -43,22 +46,60 @@ body,html {
 	margin-top: 0px !important;
 }
 
-.backgroundRow{
-	margin-bottom:50%;
+/* title style */
+
+header {
+	position: relative;
+	width: 100%;
+	height: 600vh;
+	align-items: center;
+	display: flex;
+	margin-bottom: 50px;
+	padding-bottom: 50px;
 }
 
-.background{
-	width: 100vw;
-	height: 100vh;
-}
-
-
-.title{
+header:before {
+	content: '';
 	position: absolute;
-	top: 50%;
+	bottom: 0;
+	width: 100%;
+	z-index: 5;
+}
+
+header:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	Left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(to top, rgba(253, 225, 191, 0.95) 15%, rgba(253, 225, 191, 0.5) 25%, rgba(18,37,56,0.17969194513742992) 35%, rgba(247,248,231,0) 40%);
+}
+header img{
+	position: absolute;
+	width: 100%;
+	pointer-events: none;
+
+}
+#land {
+	margin-top: 175%;
+	z-index: 6;
+}
+#titleText{
+	position: absolute;
+	top: 8%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	margin-top:auto;
+}
+
+/* end title style */
+
+
+
+
+p.vert-center{
+	color: #f7f8e7;
 }
 
 h1{
