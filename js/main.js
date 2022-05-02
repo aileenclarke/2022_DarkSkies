@@ -21,33 +21,36 @@ function createLocationMap(){
         .setView([39,-98],4); 
 
     //adds zoom buttons to top left
-    L.control.zoom({position:'topleft'}).addTo(locationMap);
+    //L.control.zoom({position:'topleft'}).addTo(locationMap);
 
     //add the basemap.
     L.tileLayer('https://api.mapbox.com/styles/v1/ajnovak/cl2grbrgj003o14mot9tnmwh1/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWpub3ZhayIsImEiOiJja2dnMWJoYXkwd3hlMnlsN241MHU3aTdyIn0.YlwTqHjnT8sUrhr8vtkWjg', {
 	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 	    subdomains: 'abcd',
     }).addTo(locationMap);    
-}
+};
 
 // get user location
 function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(saveLocation);
-  } else { 
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(saveLocation);
+    };
+};
+
+function noLocation() { 
     var lat = 39;
     var long = 105;
-    createArray();
+    console.log(lat, long)
+    createArray(lat,long);
     scrollLocation();
-  }
-}
+};
 
 function saveLocation(position) {
-  var lat = position.coords.latitude;
-  var long = position.coords.longitude;
-  console.log(lat, long)
-  createArray()
-  scrollLocation();
+    var lat = position.coords.latitude;
+    var long = position.coords.longitude;
+    console.log(lat, long)
+    createArray();
+    scrollLocation();
 }
 
 // array containing locations
@@ -68,9 +71,9 @@ function createArray(){
             location:[39,-98],
             zoom: 4,
         }
-    ]
-    return locations
-}
+    ];
+    return locations;
+};
 
 // function to trigger location prompt
 function scrollLocation(){
@@ -119,8 +122,22 @@ function createSliderMap(){
 
     // compare two layers on map
     L.control.sideBySide(layer1, layer2).addTo(sliderMap);
-};
 
+    var sliderLegend = L.Control.extend({
+        options: {
+            position: "bottomright"
+        },
+        onAdd:function(){
+            var sliderContainer = L.DomUtil.create('div','legend-control-container');
+            sliderContainer.innerHTML = '<p class="slideLegend">Legend</p>';
+            var svg = '<svg id="attribute-legend" width="190px" height="25px"><style>.c{fill:url(#b);}</style><linearGradient id="b" x1="0" y1="9.38215" x2="187.18535" y2="9.38215" gradientTransform="matrix(1, 0, 0, 1, 0, 0)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0c1c2c"/><stop offset="1" stop-color="#f7f8e8"/></linearGradient></defs><rect class="c" width="187.18535" height="18.7643"/>';
+            
+            sliderContainer.insertAdjacentHTML('beforeend',svg)
+            return sliderContainer;
+        }
+    });
+    sliderMap.addControl(new sliderLegend());  
+};
 
 // create array containing flyTo locations
 var fly= [
@@ -148,6 +165,25 @@ function scroll(){
     })
 }
 
+function isInPosition(id, location, zoom){
+    
+    // get element and element's property 'top'
+    var block1 = document.getElementById(id);
+    var rect = block1.getBoundingClientRect();
+    y = rect.top;
+
+    // set the top margin as a ratio of innerHeight
+    var topMargin = window.innerHeight / 2;
+
+    // call flyTo when top of element is halfway up innerHeight
+    if ((y-topMargin) < 0 && y > 0){
+        sliderMap.flyTo(location, zoom, {
+            animate: true,
+            duration: 2 // in seconds
+        });
+    }
+}
+
 function IDAscroll(){
 //code for IDA points
     document.querySelectorAll('.IDA-points').forEach(function(div){
@@ -166,25 +202,6 @@ function IDAscroll(){
     }
     })
 
-}
-
-function isInPosition(id, location, zoom){
-    
-    // get element and element's property 'top'
-    var block1 = document.getElementById(id);
-    var rect = block1.getBoundingClientRect();
-    y = rect.top;
-
-    // set the top margin as a ratio of innerHeight
-    var topMargin = window.innerHeight / 2;
-
-    // call flyTo when top of element is halfway up innerHeight
-    if ((y-topMargin) < 0 && y > 0){
-        sliderMap.flyTo(location, zoom, {
-            animate: true,
-            duration: 2 // in seconds
-        });
-    }
 }
 
 // IMAGE FADE
@@ -346,6 +363,6 @@ document.addEventListener('DOMContentLoaded', createLocationMap)
 document.addEventListener('DOMContentLoaded', createSliderMap)
 document.addEventListener('DOMContentLoaded', createFinalMap)
 document.addEventListener('scroll', scroll)
-document.addEventListener('scroll', scrollFade)
+//document.addEventListener('scroll', scrollFade)
 document.addEventListener('scroll', IDAscroll)
-document.addEventListener('scroll', scrollLocation)
+//document.addEventListener('scroll', scrollLocation)

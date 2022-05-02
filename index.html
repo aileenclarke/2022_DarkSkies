@@ -17,6 +17,7 @@
 
     <body>
         <!--page content-->
+    <div>
         <header>
             <img src="img/background.gif" id="stars">
             <img src="img/land.png" id="land">
@@ -24,30 +25,31 @@
                 <h1 id="titleText">Since the dawn of time, humans have
                     spent half their time under skies like these. </h1>
 
-                </section>
+            </section>
 
-            </header>
+        </header>
 
-            <script type="text/javascript">
-                let stars = document.getElementById("stars");
-                let mtn = document.getElementById("land");
-                let text = document.getElementById("tileText");
-                window.addEventListener('scroll', function(){
-                    var value = window.scrollY;
-                    stars.style.top = value * 0.5 + 'px'
-                    land.style.top = -value * 0.1 + 'px'
-                    text.style.top = value * 0.15 + 'px'
-                })
+        <script type="text/javascript">
+            let stars = document.getElementById("stars");
+            let mtn = document.getElementById("land");
+            let text = document.getElementById("titleText");
+            window.addEventListener('scroll', function(){
+                var value = window.scrollY;
+                stars.style.top = value * 0.5 + 'px'
+                land.style.top = -value * 0.1 + 'px'
+                text.style.top = value * 0.15 + 'px'
+            });
+        </script>
     
-                </script>
-        </div>
         
-        
+        <!--scroll content-->
 
         <div class="content">
             <div class="row">
                 <div class="center">
-                    <button class="button" class="vert-center" onclick="getLocation()" >Allow Location Use</button>
+                    <p class="vert-center">Share your location?</p>
+                    <button class="button" class="vert-center" onclick="getLocation()" >Yes</button>
+                    <button class="button" class="vert-center" onclick="noLocation()" >No thanks</button>
                     <p id="demo"></p>
                 </div>
             </div>
