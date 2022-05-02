@@ -17,13 +17,32 @@
 
     <body>
         <!--page content-->
-        <div class="backgroundRow" >
-            <img class="background" id="imageFade" src="img/placeholder.jpg">
-            <div class="title">
-                <h1>Since the dawn of time, humans have
+        <header>
+            <img src="img/background.gif" id="stars">
+            <img src="img/land.png" id="land">
+            <section>
+                <h1 id="titleText">Since the dawn of time, humans have
                     spent half their time under skies like these. </h1>
-            </div>
+
+                </section>
+
+            </header>
+
+            <script type="text/javascript">
+                let stars = document.getElementById("stars");
+                let mtn = document.getElementById("land");
+                let text = document.getElementById("tileText");
+                window.addEventListener('scroll', function(){
+                    var value = window.scrollY;
+                    stars.style.top = value * 0.5 + 'px'
+                    land.style.top = -value * 0.1 + 'px'
+                    text.style.top = value * 0.15 + 'px'
+                })
+    
+                </script>
         </div>
+        
+        
 
         <div class="content">
             <div class="row">
