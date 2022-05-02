@@ -9,6 +9,9 @@ var sliderMap;
 //Explorable Leaflet map at the end.
 var finalMap;
 
+//IDA points layer
+var IDApoints;
+
 //LOCATION MAP
 
 // create location map
@@ -145,6 +148,26 @@ function scroll(){
     })
 }
 
+function IDAscroll(){
+//code for IDA points
+    document.querySelectorAll('.IDA-points').forEach(function(div){
+    // get element and element's property 'top'
+    var rect = div.getBoundingClientRect();
+    y = rect.top;
+
+    // set the top margin as a ratio of innerHeight
+    var topMargin = window.innerHeight / 2;
+     // call setStyle when top of element is halfway up innerHeight
+     if ((y-topMargin) < 0 && y > 0){
+        IDApoints.setStyle(function(feature){
+            return style(feature, parseFloat(div.id))
+        });
+        document.querySelector('.yearLegend').innerHTML = div.id;
+    }
+    })
+
+}
+
 function isInPosition(id, location, zoom){
     
     // get element and element's property 'top'
@@ -236,14 +259,16 @@ function getData(){
         })        
         .then(function(json){
             //create a Leaflet GeoJSON layer and add it to the map
-            L.geoJson(json,{
+            IDApoints = L.geoJson(json,{
                 onEachFeature:function(feature, layer){
                     var popupContent = createPopupContent(feature);
                     layer.bindPopup(popupContent)
-                }
+                },
+                pointToLayer: pointToLayer
+                //first 'style' is property, second 'style' calls style function.
             }).addTo(finalMap);
+            IDApoints.setStyle(style);
             createYearLegend();
-            //sequencePoints(json);
         });
 };
 
@@ -272,21 +297,55 @@ function createYearLegend(){
     finalMap.addControl(new LegendControl());
 };
 
+
+function style(feature, divID){
+    return {
+        fillOpacity: opacityFilter(feature.properties, divID),
+        //interactiveFilter(feature.properties)
+    }
+}
+
+function opacityFilter(props, divID){
+    if (parseFloat(props.Year) <= divID){
+        return 1
+    } else {
+        return 0
+    };
+};
+
 /*
-function sequencePoints(data){
-    finalMap.eachLayer(function(layer){
-        layer.filter(function(){
-            if (data.properties.Year == 2001){
-                return true;
-            }
-        })
-    });
+function interactiveFilter(props){
+    if (parseFloat(props.Year) > 2001){
+        return false
+    } else {
+        return true
+    };
 };
 */
+//function to convert markers to circle markers
+function pointToLayer(feature, latlng){
+   //create marker options
+   //sort data into two colors based on status
+       var options = {
+           fillColor: "red",
+           color: "#000",
+           weight: 0,
+           opacity: 1,
+           fillOpacity: 0.7,
+           radius: 5
+       };
+
+       //create circle marker layer   
+       var layer = L.circleMarker(latlng, options);
+
+       //return the circle marker to the L.geoJson pointToLayer option
+       return layer;
+   };
 
 document.addEventListener('DOMContentLoaded', createLocationMap)
 document.addEventListener('DOMContentLoaded', createSliderMap)
 document.addEventListener('DOMContentLoaded', createFinalMap)
 document.addEventListener('scroll', scroll)
 document.addEventListener('scroll', scrollFade)
+document.addEventListener('scroll', IDAscroll)
 document.addEventListener('scroll', scrollLocation)

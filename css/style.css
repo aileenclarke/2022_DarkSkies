@@ -64,3 +64,12 @@ body,html {
 h1{
 	font-size: 4em;
 	color: aliceblue;
+}
+
+.IDArow{
+	margin-bottom: 100px !important;
+}
+
+.IDA-points {
+	background-color:rgba(255, 255, 255, 0) !important;
+}
