@@ -235,13 +235,12 @@ function scrollFade(){
 }
 
 //Explorable Leaflet map
-
 function createFinalMap(){
     //create the map
     finalMap = L.map('finalMap', {
         //map parameters
-        center: [39,-98],
-        zoom: 4,
+        center: [39,-96],
+        zoom: 5,
         maxZoom: 12,
         minZoom: 4,
         scrollWheelZoom: false,
@@ -288,6 +287,7 @@ function getData(){
         });
 };
 
+//create IDApoint pop up
 function createPopupContent(feature){
     var popupContent = "<p><b>Name:</b> " + feature.properties.Name + 
         "</p><p><b>Year designated:</b> " + feature.properties.Year + 
@@ -295,6 +295,7 @@ function createPopupContent(feature){
     return popupContent
 };
 
+//create dynamic final map legend
 function createYearLegend(){
     var LegendControl = L.Control.extend({
         options: {
@@ -313,14 +314,17 @@ function createYearLegend(){
     finalMap.addControl(new LegendControl());
 };
 
-
+//dynamically change IDA point style
 function style(feature, divID){
     return {
+        interactive: true,
+        //interactive: interactiveFilter(feature.properties, divID),
         fillOpacity: opacityFilter(feature.properties, divID),
-        //interactiveFilter(feature.properties)
+        fillColor: colorFilter(feature.properties, divID)
     }
 }
 
+//change IDA point opacity based on year
 function opacityFilter(props, divID){
     if (parseFloat(props.Year) <= divID){
         return 1
@@ -329,15 +333,27 @@ function opacityFilter(props, divID){
     };
 };
 
-/*
-function interactiveFilter(props){
-    if (parseFloat(props.Year) > 2001){
-        return false
-    } else {
+function interactiveFilter(props, divID){
+    return true
+    
+    /*if (parseFloat(props.Year) <= divID){
         return true
+    } else {
+        return false
+    };*/
+};
+
+//change IDApoint color based on type of IDA place
+function colorFilter(props, divID){
+    if (props.Type === "Park" || props.Type === "Sanctuary" || props.Type === "Reserve") {
+        return "green"
+    } else if (props.Type === "Community") {
+        return "blue"
+    } else {
+        return "red"
     };
 };
-*/
+
 //function to convert markers to circle markers
 function pointToLayer(feature, latlng){
    //create marker options
@@ -348,7 +364,8 @@ function pointToLayer(feature, latlng){
            weight: 0,
            opacity: 1,
            fillOpacity: 0.7,
-           radius: 5
+           radius: 5,
+           interactive: false
        };
 
        //create circle marker layer   
