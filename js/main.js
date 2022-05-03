@@ -12,6 +12,9 @@ var finalMap;
 //IDA points layer
 var IDApoints;
 
+// location data for locator map
+var locations;
+
 //LOCATION MAP
 
 // create location map
@@ -19,9 +22,6 @@ function createLocationMap(){
     locationMap = L.map('locationMap',{
         scrollWheelZoom: false})
         .setView([39,-98],4); 
-
-    //adds zoom buttons to top left
-    //L.control.zoom({position:'topleft'}).addTo(locationMap);
 
     //add the basemap.
     L.tileLayer('https://api.mapbox.com/styles/v1/ajnovak/cl2grbrgj003o14mot9tnmwh1/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWpub3ZhayIsImEiOiJja2dnMWJoYXkwd3hlMnlsN241MHU3aTdyIn0.YlwTqHjnT8sUrhr8vtkWjg', {
@@ -37,42 +37,42 @@ function getLocation() {
     };
 };
 
+// set lat long if user denies location access
 function noLocation() { 
     var lat = 39;
-    var long = 105;
-    console.log(lat, long)
-    createArray(lat,long);
-    scrollLocation();
+    var long = -105;
+    locations = createArray(lat, long);
+    scrollLocation(null, locations);
 };
 
+// set lat long if user allows location access
 function saveLocation(position) {
     var lat = position.coords.latitude;
     var long = position.coords.longitude;
-    console.log(lat, long)
-    createArray();
-    scrollLocation();
+    locations = createArray(lat, long);
+    scrollLocation(null, locations);
 }
 
 // array containing locations
-function createArray(){
-    var locations = [
+function createArray(lat,long){
+    var temp = [
         {
-            id: userLoc,
+            id: "userLoc",
             location:[lat, long],
-            zoom: 14
+            zoom: 13
         },
         {
-            id: userCity,
+            id: "userCity",
             location:[lat, long],
-            zoom: 8
+            zoom: 10
         },
         {
-            id: US,
+            id: "US",
             location:[39,-98],
             zoom: 4,
         }
     ];
-    return locations;
+    return temp;
 };
 
 // function to trigger location prompt
@@ -385,4 +385,4 @@ document.addEventListener('DOMContentLoaded', createFinalMap)
 document.addEventListener('scroll', scroll)
 //document.addEventListener('scroll', scrollFade)
 document.addEventListener('scroll', IDAscroll)
-//document.addEventListener('scroll', scrollLocation)
+document.addEventListener('scroll', scrollLocation)
