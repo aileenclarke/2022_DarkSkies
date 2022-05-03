@@ -275,14 +275,17 @@ function getData(){
         .then(function(json){
             //create a Leaflet GeoJSON layer and add it to the map
             IDApoints = L.geoJson(json,{
+                //creates IDA pop ups
                 onEachFeature:function(feature, layer){
                     var popupContent = createPopupContent(feature);
                     layer.bindPopup(popupContent)
                 },
+                //convert the IDA data from points to layers to give us more symbology control
                 pointToLayer: pointToLayer
-                //first 'style' is property, second 'style' calls style function.
             }).addTo(finalMap);
+            //call the style function within the Leaflet setStyle funciton, dynamically changing the IDA point style based on where the user is in the page
             IDApoints.setStyle(style);
+            //create a year legend
             createYearLegend();
         });
 };
@@ -295,7 +298,7 @@ function createPopupContent(feature){
     return popupContent
 };
 
-//create dynamic final map legend
+//create final map legend
 function createYearLegend(){
     var LegendControl = L.Control.extend({
         options: {
@@ -317,6 +320,7 @@ function createYearLegend(){
 //dynamically change IDA point style
 function style(feature, divID){
     return {
+        //having issues with interactive option atm
         interactive: true,
         //interactive: interactiveFilter(feature.properties, divID),
         fillOpacity: opacityFilter(feature.properties, divID),
