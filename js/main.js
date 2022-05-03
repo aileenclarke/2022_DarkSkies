@@ -192,7 +192,7 @@ function IDAscroll(){
     y = rect.top;
 
     // set the top margin as a ratio of innerHeight
-    var topMargin = window.innerHeight / 2;
+    var topMargin = window.innerHeight;
      // call setStyle when top of element is halfway up innerHeight
      if ((y-topMargin) < 0 && y > 0){
         IDApoints.setStyle(function(feature){
@@ -201,7 +201,6 @@ function IDAscroll(){
         document.querySelector('.yearLegend').innerHTML = div.id;
     }
     })
-
 }
 
 // IMAGE FADE
