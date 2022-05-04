@@ -13,15 +13,25 @@ body,html {
 }
 
 #locationMap {
-	width: 90vw;
-	height: 80vh;
+	height: 100vh;
+	width: 100%;
+	/*z-index important for drawing order, 0 puts map on bottom*/
+	z-index: 0;
+	/*margin-left: 5%;*/
+	/*margin-bottom: 5%;*/
 	margin: 5%;
+	margin-left: 0 !important;
 }
 
 #sliderMap {
 	height: 100vh;
 	width: 100%;
-	
+	/*z-index important for drawing order, 0 puts map on bottom*/
+	z-index: 0;
+	/*margin-left: 5%;*/
+	/*margin-bottom: 5%;*/
+	margin: 5%;
+	margin-left: 0 !important;
 }
 
 .slideLegend{
@@ -31,7 +41,7 @@ body,html {
 }
 
 .legend-control-container {
-	width:200px;
+	width:300px;
 	height: 50px;
 	font-weight: bold;
 	font-size: large;
@@ -39,6 +49,7 @@ body,html {
 	padding: 10px;
 	border: solid gray 1px;
 }
+
 
 #finalMap {
 	height: 100vh;
@@ -155,6 +166,10 @@ width: 100%;
 	opacity: 100;
 }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 #constfade1 {
 	opacity: 0;
 }

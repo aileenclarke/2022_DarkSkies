@@ -20,9 +20,12 @@ var locations;
 // create location map
 function createLocationMap(){
     locationMap = L.map('locationMap',{
+        center: [39,-96],
+        zoom: 5,
+        maxZoom: 12,
+        minZoom: 4,
         scrollWheelZoom: false,
-        zoomControl: false})
-        .setView([39,-98],4); 
+        zoomControl: false});
 
     //add the basemap.
     L.tileLayer('https://api.mapbox.com/styles/v1/ajnovak/cl2grbrgj003o14mot9tnmwh1/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWpub3ZhayIsImEiOiJja2dnMWJoYXkwd3hlMnlsN241MHU3aTdyIn0.YlwTqHjnT8sUrhr8vtkWjg', {
@@ -30,7 +33,7 @@ function createLocationMap(){
 	    subdomains: 'abcd',
     }).addTo(locationMap);   
     
-    var zoomHome = L.Control.zoomHome();
+    var zoomHome = L.Control.zoomHome({position:'bottomright'});
     zoomHome.addTo(locationMap);
 };
 
@@ -72,8 +75,8 @@ function createArray(lat,long){
         },
         {
             id: "US",
-            location:[39,-98],
-            zoom: 4,
+            location:[39,-96],
+            zoom: 5,
         }
     ];
     return temp;
@@ -111,9 +114,12 @@ function locatorIsInPosition(id, location, zoom){
 function createSliderMap(){
 
     sliderMap = L.map('sliderMap',{
+        center: [39,-96],
+        zoom: 5,
+        maxZoom: 12,
+        minZoom: 4,
         scrollWheelZoom: false,
-        zoomControl: false})
-        .setView([39,-98],4);
+        zoomControl: false});
 
     // mapbox layer 1
     var layer1 = L.tileLayer('https://api.mapbox.com/styles/v1/ajnovak/cl2mu2v9u004615mz0p7u40yu/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWpub3ZhayIsImEiOiJja2dnMWJoYXkwd3hlMnlsN241MHU3aTdyIn0.YlwTqHjnT8sUrhr8vtkWjg', { 
@@ -127,32 +133,31 @@ function createSliderMap(){
 
     // compare two layers on map
     L.control.sideBySide(layer1, layer2).addTo(sliderMap);
+    
+    var zoomHome = L.Control.zoomHome({position:'bottomright'});
+    zoomHome.addTo(sliderMap);
 
     var sliderLegend = L.Control.extend({
         options: {
-            position: "bottomright"
+            position: "bottomleft"
         },
         onAdd:function(){
             var sliderContainer = L.DomUtil.create('div','legend-control-container');
-            sliderContainer.innerHTML = '<p class="slideLegend">Legend</p>';
-            var svg = '<svg id="attribute-legend" width="190px" height="25px"><style>.c{fill:url(#b);}</style><linearGradient id="b" x1="0" y1="9.38215" x2="187.18535" y2="9.38215" gradientTransform="matrix(1, 0, 0, 1, 0, 0)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0c1c2c"/><stop offset="1" stop-color="#f7f8e8"/></linearGradient></defs><rect class="c" width="187.18535" height="18.7643"/>';
-            
+            sliderContainer.innerHTML = '<p class="slideLegend">More Stars</p>';
+            var svg = '<svg id="attribute-legend" width="250" height="25"><style>.c{fill:url(#b);}</style><linearGradient id="b" x1="0" y1="9.38215" x2="187.18535" y2="9.38215" gradientTransform="matrix(1, 0, 0, 1, 0, 0)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0c1c2c"/><stop offset="1" stop-color="#f7f8e8"/></linearGradient></defs><rect class="c" width="187.18535" height="18.7643"/>';
             sliderContainer.insertAdjacentHTML('beforeend',svg)
             return sliderContainer;
         }
     });
     sliderMap.addControl(new sliderLegend());  
-
-    var zoomHome = L.Control.zoomHome();
-    zoomHome.addTo(sliderMap);
 };
 
 // create array containing flyTo locations
 var fly= [
     {
         id:"start",
-        location:[39,-98],
-        zoom: 4
+        location:[39,-96],
+        zoom: 5
     },
     {
         id:"block1",
@@ -211,32 +216,43 @@ function IDAscroll(){
     })
 }
 // CONSTELLATION IMAGE FADE
+<<<<<<< Updated upstream
 function constScroll(){
     //code for first imamge
         document.querySelectorAll('#constfade1').forEach(function(div){
         // get element and element's property 'top'
         var rect = div.getBoundingClientRect();
         y = rect.top;
-    
-        // set the top margin as a ratio of innerHeight
-        var topMargin = window.innerHeight;
-         // call setStyle when top of element is halfway up innerHeight
-         if ((y-topMargin) < 0 && y > 0){
-            constfade1.setStyle(function(feature){
-                return constFade(div.id)
-            });
-        }
-        })
-    }
+=======
 
-//dynamically change IDA point style
-function constFade(divID){
-    if(divID === "fade1"){
-        return 1
-    } else {
-        return 0
-    };
-};
+function scrollConst(){
+    // get element and element's property 'top'
+    var textRise = document.getElementById('fade1');
+    var imageFade = document.getElementById('constfade1');
+    var rect = textRise.getBoundingClientRect();
+    y = rect.top;
+>>>>>>> Stashed changes
+    
+    // set the top margin as a ratio of innerHeight
+    var topMargin = window.innerHeight;
+
+    // element height
+    var elementHeight = textRise.offsetHeight;
+
+    // number of px the element is scrolled vertically
+    var scrollTop = document.documentElement.scrollTop;
+    
+    //initialize opacity
+    var opacity = 0;
+    
+    // if scrollTop > topMargin, start fading out
+    if ((y-topMargin) < 0 && y > 0){
+          opacity = 0 + (scrollTop + topMargin) / elementHeight;
+      }
+    if (opacity <= 1) {
+        imageFade.style.opacity = opacity;
+      }
+    }
 
 // IMAGE FADE
 
@@ -289,9 +305,9 @@ function createFinalMap(){
     });
     //adds zoom buttons back to top left
     //L.control.zoom({position:'topleft'}).addTo(finalMap);
-
+    
     // add zoom with home button
-    var zoomHome = L.Control.zoomHome();
+    var zoomHome = L.Control.zoomHome({position:'bottomright'});
     zoomHome.addTo(finalMap);
 
     //add the basemap.
@@ -320,12 +336,10 @@ function getData(){
                     layer.bindPopup(popupContent)
                 },
                 //convert the IDA data from points to layers to give us more symbology control
-                pointToLayer: function(feature, latlng){
-                    return pointToLayer(feature, latlng,"2007")
-                }
+                pointToLayer: pointToLayer
             }).addTo(finalMap);
             //call the style function within the Leaflet setStyle funciton, dynamically changing the IDA point style based on where the user is in the page
-            //IDApoints.setStyle(style);
+            IDApoints.setStyle(style);
             //create a year legend
             createYearLegend();
         });
@@ -343,7 +357,7 @@ function createPopupContent(feature){
 function createYearLegend(){
     var LegendControl = L.Control.extend({
         options: {
-            position: 'bottomleft'
+            position: 'topleft'
         },
         onAdd: function () {
             // create the control container with a particular class name
@@ -362,11 +376,10 @@ function createYearLegend(){
 function style(feature, divID){
     return {
         //having issues with interactive option atm
-        //interactive: false,
+        interactive: true,
         //interactive: interactiveFilter(feature.properties, divID),
         fillOpacity: opacityFilter(feature.properties, divID),
-        fillColor: colorFilter(feature.properties, divID),
-        className:"HELLO"
+        fillColor: colorFilter(feature.properties, divID)
     }
 }
 
@@ -379,12 +392,14 @@ function opacityFilter(props, divID){
     };
 };
 
-function interactiveFilter(props, divID){    
-    if (parseFloat(props.Year) <= divID){
+function interactiveFilter(props, divID){
+    return true
+    
+    /*if (parseFloat(props.Year) <= divID){
         return true
     } else {
         return false
-    };
+    };*/
 };
 
 
@@ -401,17 +416,18 @@ function colorFilter(props, divID){
 
 
 //function to convert markers to circle markers
-function pointToLayer(feature, latlng, divID){
+function pointToLayer(feature, latlng){
    //create marker options
    //sort data into two colors based on status
        var options = {
+           fillColor: "#FF544B",
            color: "#000",
            weight: 0,
-           fillOpacity: opacityFilter(feature.properties, divID),
-           fillColor: colorFilter(feature.properties, divID),
+           opacity: 1,
+           fillOpacity: 0.7,
            radius: 5,
-           interactive:interactiveFilter(feature.properties, divID)
-         };
+           interactive: false
+       };
 
        //create circle marker layer   
        var layer = L.circleMarker(latlng, options);
@@ -426,5 +442,4 @@ document.addEventListener('DOMContentLoaded', createFinalMap)
 document.addEventListener('scroll', scroll)
 //document.addEventListener('scroll', scrollFade)
 document.addEventListener('scroll', IDAscroll)
-document.addEventListener('scroll', constScroll)
 //document.addEventListener('scroll', scrollLocation)
