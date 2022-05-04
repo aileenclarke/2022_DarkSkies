@@ -20,14 +20,18 @@ var locations;
 // create location map
 function createLocationMap(){
     locationMap = L.map('locationMap',{
-        scrollWheelZoom: false})
+        scrollWheelZoom: false,
+        zoomControl: false})
         .setView([39,-98],4); 
 
     //add the basemap.
     L.tileLayer('https://api.mapbox.com/styles/v1/ajnovak/cl2grbrgj003o14mot9tnmwh1/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWpub3ZhayIsImEiOiJja2dnMWJoYXkwd3hlMnlsN241MHU3aTdyIn0.YlwTqHjnT8sUrhr8vtkWjg', {
 	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 	    subdomains: 'abcd',
-    }).addTo(locationMap);    
+    }).addTo(locationMap);   
+    
+    var zoomHome = L.Control.zoomHome();
+    zoomHome.addTo(locationMap);
 };
 
 // get user location
@@ -39,8 +43,8 @@ function getLocation() {
 
 // set lat long if user denies location access
 function noLocation() { 
-    var lat = 39;
-    var long = -105;
+    var lat = 39.71;
+    var long = -105.06;
     locations = createArray(lat, long);
     scrollLocation(null, locations);
 };
@@ -64,7 +68,7 @@ function createArray(lat,long){
         {
             id: "userCity",
             location:[lat, long],
-            zoom: 10
+            zoom: 9
         },
         {
             id: "US",
@@ -107,7 +111,8 @@ function locatorIsInPosition(id, location, zoom){
 function createSliderMap(){
 
     sliderMap = L.map('sliderMap',{
-        scrollWheelZoom: false})
+        scrollWheelZoom: false,
+        zoomControl: false})
         .setView([39,-98],4);
 
     // mapbox layer 1
@@ -137,6 +142,9 @@ function createSliderMap(){
         }
     });
     sliderMap.addControl(new sliderLegend());  
+
+    var zoomHome = L.Control.zoomHome();
+    zoomHome.addTo(sliderMap);
 };
 
 // create array containing flyTo locations
@@ -253,7 +261,11 @@ function createFinalMap(){
             ]
     });
     //adds zoom buttons back to top left
-    L.control.zoom({position:'topleft'}).addTo(finalMap);
+    //L.control.zoom({position:'topleft'}).addTo(finalMap);
+
+    // add zoom with home button
+    var zoomHome = L.Control.zoomHome();
+    zoomHome.addTo(finalMap);
 
     //add the basemap.
     L.tileLayer('https://api.mapbox.com/styles/v1/ajnovak/cl2grbrgj003o14mot9tnmwh1/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWpub3ZhayIsImEiOiJja2dnMWJoYXkwd3hlMnlsN241MHU3aTdyIn0.YlwTqHjnT8sUrhr8vtkWjg', {
