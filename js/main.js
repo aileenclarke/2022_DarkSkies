@@ -46,7 +46,7 @@ function noLocation() {
     var lat = 39.71;
     var long = -105.06;
     locations = createArray(lat, long);
-    scrollLocation(null, locations);
+    //scrollLocation(null, locations);
 };
 
 // set lat long if user allows location access
@@ -211,34 +211,32 @@ function IDAscroll(){
     })
 }
 // CONSTELLATION IMAGE FADE
-
-function scrollConst(){
-    // get element and element's property 'top'
-    var textRise = document.getElementById('fade1');
-    var imageFade = document.getElementById('constfade1');
-    var rect = textRise.getBoundingClientRect();
-    y = rect.top;
+function constScroll(){
+    //code for first imamge
+        document.querySelectorAll('.constfade1').forEach(function(div){
+        // get element and element's property 'top'
+        var rect = div.getBoundingClientRect();
+        y = rect.top;
     
-    // set the top margin as a ratio of innerHeight
-    var topMargin = window.innerHeight;
-
-    // element height
-    var elementHeight = textRise.offsetHeight;
-
-    // number of px the element is scrolled vertically
-    var scrollTop = document.documentElement.scrollTop;
-    
-    //initialize opacity
-    var opacity = 0;
-    
-    // if scrollTop > topMargin, start fading out
-    if ((y-topMargin) < 0 && y > 0){
-          opacity = 0 + (scrollTop + topMargin) / elementHeight;
-      }
-    if (opacity <= 1) {
-        imageFade.style.opacity = opacity;
-      }
+        // set the top margin as a ratio of innerHeight
+        var topMargin = window.innerHeight;
+         // call setStyle when top of element is halfway up innerHeight
+         if ((y-topMargin) < 0 && y > 0){
+            constfade1.setStyle(function(feature){
+                return constFade(div.id)
+            });
+        }
+        })
     }
+
+//dynamically change IDA point style
+function constFade(divID){
+    if(divID === "fade1"){
+        return 1
+    } else {
+        return 0
+    };
+};
 
 // IMAGE FADE
 
@@ -322,10 +320,12 @@ function getData(){
                     layer.bindPopup(popupContent)
                 },
                 //convert the IDA data from points to layers to give us more symbology control
-                pointToLayer: pointToLayer
+                pointToLayer: function(feature, latlng){
+                    return pointToLayer(feature, latlng,"2007")
+                }
             }).addTo(finalMap);
             //call the style function within the Leaflet setStyle funciton, dynamically changing the IDA point style based on where the user is in the page
-            IDApoints.setStyle(style);
+            //IDApoints.setStyle(style);
             //create a year legend
             createYearLegend();
         });
@@ -362,10 +362,11 @@ function createYearLegend(){
 function style(feature, divID){
     return {
         //having issues with interactive option atm
-        interactive: true,
+        //interactive: false,
         //interactive: interactiveFilter(feature.properties, divID),
         fillOpacity: opacityFilter(feature.properties, divID),
-        fillColor: colorFilter(feature.properties, divID)
+        fillColor: colorFilter(feature.properties, divID),
+        className:"HELLO"
     }
 }
 
@@ -378,14 +379,12 @@ function opacityFilter(props, divID){
     };
 };
 
-function interactiveFilter(props, divID){
-    return true
-    
-    /*if (parseFloat(props.Year) <= divID){
+function interactiveFilter(props, divID){    
+    if (parseFloat(props.Year) <= divID){
         return true
     } else {
         return false
-    };*/
+    };
 };
 
 
@@ -402,18 +401,17 @@ function colorFilter(props, divID){
 
 
 //function to convert markers to circle markers
-function pointToLayer(feature, latlng){
+function pointToLayer(feature, latlng, divID){
    //create marker options
    //sort data into two colors based on status
        var options = {
-           fillColor: "#FF544B",
            color: "#000",
            weight: 0,
-           opacity: 1,
-           fillOpacity: 0.7,
+           fillOpacity: opacityFilter(feature.properties, divID),
+           fillColor: colorFilter(feature.properties, divID),
            radius: 5,
-           interactive: false
-       };
+           interactive:interactiveFilter(feature.properties, divID)
+         };
 
        //create circle marker layer   
        var layer = L.circleMarker(latlng, options);
@@ -428,4 +426,5 @@ document.addEventListener('DOMContentLoaded', createFinalMap)
 document.addEventListener('scroll', scroll)
 //document.addEventListener('scroll', scrollFade)
 document.addEventListener('scroll', IDAscroll)
-document.addEventListener('scroll', scrollLocation)
+document.addEventListener('scroll', constScroll)
+//document.addEventListener('scroll', scrollLocation)
