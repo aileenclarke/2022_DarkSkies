@@ -216,42 +216,24 @@ function IDAscroll(){
     })
 }
 // CONSTELLATION IMAGE FADE
-<<<<<<< Updated upstream
 function constScroll(){
     //code for first imamge
         document.querySelectorAll('#constfade1').forEach(function(div){
         // get element and element's property 'top'
         var rect = div.getBoundingClientRect();
         y = rect.top;
-=======
-
-function scrollConst(){
-    // get element and element's property 'top'
-    var textRise = document.getElementById('fade1');
-    var imageFade = document.getElementById('constfade1');
-    var rect = textRise.getBoundingClientRect();
-    y = rect.top;
->>>>>>> Stashed changes
     
-    // set the top margin as a ratio of innerHeight
-    var topMargin = window.innerHeight;
-
-    // element height
-    var elementHeight = textRise.offsetHeight;
-
-    // number of px the element is scrolled vertically
-    var scrollTop = document.documentElement.scrollTop;
-    
-    //initialize opacity
-    var opacity = 0;
-    
-    // if scrollTop > topMargin, start fading out
-    if ((y-topMargin) < 0 && y > 0){
-          opacity = 0 + (scrollTop + topMargin) / elementHeight;
-      }
-    if (opacity <= 1) {
-        imageFade.style.opacity = opacity;
-      }
+        // set the top margin as a ratio of innerHeight
+        var topMargin = window.innerHeight;
+         // call setStyle when top of element is halfway up innerHeight
+         if ((y-topMargin) < 0 && y > 0){
+            constfade1.setStyle(function(feature){
+                return{
+                    opacity: constFade(div.id)
+                }
+            });
+        }
+        })
     }
 
 // IMAGE FADE
