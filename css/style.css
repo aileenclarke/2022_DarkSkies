@@ -155,10 +155,6 @@ width: 100%;
 	opacity: 100;
 }
 
-.constText{
-	margin-bottom: 600px !important;
-}
-
 #constfade1 {
 	opacity: 0;
 }
@@ -244,4 +240,8 @@ h1{
 }
 .interactive{
 	pointer-events:none;
+}
+
+#fade1 #fade2 #fade3 {
+	margin-bottom: 100px !important;
 }
