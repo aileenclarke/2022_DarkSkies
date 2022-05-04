@@ -127,6 +127,7 @@ p.titletext {
 	margin-bottom: 50%;
 	display: flex;
 	overflow: hidden;
+	padding-left: 0 !important;
 }
 
 #titleBackground:after {
