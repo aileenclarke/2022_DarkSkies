@@ -388,23 +388,25 @@ function interactiveFilter(props, divID){
     };*/
 };
 
+
 //change IDApoint color based on type of IDA place
 function colorFilter(props, divID){
     if (props.Type === "Park" || props.Type === "Sanctuary" || props.Type === "Reserve") {
-        return "green"
+        return "#FAE450"
     } else if (props.Type === "Community") {
-        return "blue"
+        return "#f8961e"
     } else {
-        return "red"
+        return "#f94144"
     };
 };
+
 
 //function to convert markers to circle markers
 function pointToLayer(feature, latlng){
    //create marker options
    //sort data into two colors based on status
        var options = {
-           fillColor: "red",
+           fillColor: "#FF544B",
            color: "#000",
            weight: 0,
            opacity: 1,
