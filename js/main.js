@@ -213,7 +213,7 @@ function IDAscroll(){
 // CONSTELLATION IMAGE FADE
 function constScroll(){
     //code for first imamge
-        document.querySelectorAll('.constfade1').forEach(function(div){
+        document.querySelectorAll('#constfade1').forEach(function(div){
         // get element and element's property 'top'
         var rect = div.getBoundingClientRect();
         y = rect.top;
