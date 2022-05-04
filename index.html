@@ -24,12 +24,12 @@
         <div class= "content">
             <div class= "row" id ="titleBackground">
                 <img src="img/background.gif" id="stars">
-                <img src="img/land.png" id="land"> 
+                <img src="img/land2.png" id="land"> 
                 <div class="center">       
-                    <p class ="titletext" id="opener">Since the dawn of time, humans have spent half their time under skies like these</h>
-                    <p class ="titletext">But today, the Milky Way is hidden from 80% of people in North America.</p>
-                    <p class ="titletext">99% of the continent lives under skies that experience some level of light pollution.</p>
-                    <p class ="titletext" id="edison">The culprit: nighttime lights that have proliferated since Edison invented the lightbulb</p>
+                    <p class ="titletext lg-margin" id="opener">Since the dawn of time, humans have spent half their time under skies like these</h>
+                    <p class ="titletext lg-margin">But today, the Milky Way is hidden from 80% of people in North America.</p>
+                    <p class ="titletext lg-margin">99% of the continent lives under skies that experience some level of light pollution.</p>
+                    <p class ="titletext lg-mgarin" id="edison">The culprit: nighttime lights that have proliferated since Edison invented the lightbulb</p>
                 </div>
 
                     
@@ -45,7 +45,7 @@
                 window.addEventListener('scroll', function(){
                     var value = window.scrollY;
                     stars.style.top = value * 0.5 + 'px'
-                    land.style.top = value * 0.55 + 'px'
+                   // land.style.top = value * 0.55 + 'px'
                     text.style.top = value * 0.85 + 'px'
                 });
             </script>
@@ -63,7 +63,7 @@
                     <p id="demo"></p>
                 </div>
             </div>
-            <div class="scroll-container" id="map1">
+            <div class="scroll-container" id="map1 no-margin">
                 <div class="background-item" id="item1">
                     <div id="locationMap" class="vert-center"></div>
                 </div>
@@ -85,22 +85,18 @@
                     </div>
                 </div>
             </div>
-        
-            <div class="row">
-                <img src="img/lightsdrawing2MB.png" id="drawing">
-                <div class="center">
-                    <p class="vert-center">Streetlights, car headlights and indoor lights are reflected skyward, causing a “sky
-                        glow” effect.<br>
-                        This constant light is wreaking havoc on human and wildlife physiology.</p>
+        <div class="content no-margin">
+            <div class="row no-margin">
+                <p class="titletext center">Streetlights, car headlights and indoor lights are reflected skyward, causing a “sky
+                    glow” effect.<br>
+                    This constant light is wreaking havoc on human and wildlife physiology.</p>
+                <img class="story-img" src="img/lightsdrawing2MB.png" id="drawing">
+
+                <p class="titletext center sm-margin">And it’s getting worse.</p>
+
                 </div>
-            </div>
-            <div class="row">
-                <div class="center">
-                    <p class="vert-center">And it’s getting worse.</p>
-                </div>
-            </div>
-        
-            <div class="scroll-container">
+        </div>
+            <div class="scroll-container sm-margin">
                 <div class="background-item" id="item1">
                     <div id="sliderMap" class="vert-center"></div>
                 </div>
