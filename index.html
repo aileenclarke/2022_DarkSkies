@@ -3,9 +3,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
-            <title></title>
-
+        
         <!--external stylesheets-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="dist/scrollmap.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="lib/leaflet/leaflet.css">
@@ -13,23 +15,27 @@
         <link rel="stylesheet" href="lib/leaflet-side-by-side-2.0.0/layout.css">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
         <link rel="stylesheet" href="dist/leaflet.zoomhome.css"/>
+        
 
     </head>
 
     <body>
         <!--page content-->
-    <div>
-    
-        <header>
+    <div class= "content">
+        <div class= "row" id ="titleBackground">
             <img src="img/background.gif" id="stars">
-            <img src="img/land.png" id="land">
-            <section>
-                <h1 id="titleText">Since the dawn of time, humans have
-                    spent half their time under skies like these. </h1>
+            <img src="img/land.png" id="land"> 
+            <div class="center">       
+                <p class ="titletext" id="opener">Since the dawn of time, humans have spent half their time under skies like these</h>
+                <p class ="titletext">But today, the Milky Way is hidden from 80% of people in North America.</p>
+                <p class ="titletext">99% of the continent lives under skies that experience some level of light pollution.</p>
+                <p class ="titletext" id="edison">The culprit: nighttime lights that have proliferated since Edison invented the lightbulb</p>
+            </div>
 
-            </section>
+                
+        </div>
 
-        </header>
+    </div>
 
         <script type="text/javascript">
             let stars = document.getElementById("stars");
@@ -38,10 +44,11 @@
             window.addEventListener('scroll', function(){
                 var value = window.scrollY;
                 stars.style.top = value * 0.5 + 'px'
-                land.style.top = -value * 0.1 + 'px'
-                text.style.top = value * 0.15 + 'px'
+                land.style.top = value * 0.55 + 'px'
+                text.style.top = value * 0.85 + 'px'
             });
         </script>
+    </div>
         
         
         <!--scroll content-->
@@ -79,21 +86,8 @@
             </div>
             
 
-            <div class="row">
-                <div class="center">
-                    <p class="vert-center">But today, the Milky Way is hidden from 80% of people in North America.</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="center">
-                    <p class="vert-center">99% of the continent lives under skies that experience some level of light pollution.</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="center">
-                    <p class="vert-center">The culprit: nighttime lights that have proliferated since Edison invented the lightbulb.</p>
-                </div>
-            </div>
+           
+        </div>
             <div class="row">
                 <div class="center">
                     <p class="vert-center">Streetlights, car headlights and indoor lights are reflected skyward, causing a “sky glow” effect.<br>
@@ -129,6 +123,24 @@
                         </div>
                     </div>
                 </div> 
+            </div>
+
+            <div class="content">
+                <div class="scroll-container">
+                    <div class="background-item" id="item1">
+                        <img class = "background" src="img/constbase.png" id="constbase">
+                        <img class = "background" src="img/constsleep.png" id="constfade1">
+                        <img class = "background" src="img/constturt.png" id="constfade2">
+                    </div>
+
+                    <div class="foreground-item">
+                            <p class ="constText" id="fade1">Human physiology relies on the release of melatonin to regulate the sleep-wake cycle, also known as the circadian rhythm..</p>
+                            <p class ="constText">Animals also evolved to rely on light for navigation. </p>
+                            <p class ="constText">Baby sea turtles use moonlight to navigate to the ocean after hatching.</p>
+                            <p class ="constText">However, urban light lures the sea turtles away from the sea, killing tens of thousands every year.</p>
+                     </div>
+              
+                </div>
             </div>
 
 

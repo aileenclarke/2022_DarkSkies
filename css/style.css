@@ -5,6 +5,7 @@ html {
 
 body,html {
 	margin: 0;
+	font-family: 'EB Garamond', serif;
 }
 
 #map1{
@@ -64,56 +65,98 @@ body,html {
 	margin-top: 0px !important;
 }
 
-/* title style */
+/* title sequence style */
 
-header {
+#opener {
+	position: relative;
+	color:#f7f8e7;
+	margin-top: 50%;
+	font-size: 36pt;
+
+}
+
+#edison {
+	position: relative;
+	color: #0c1427;
+	font-size: larger;
+	font-weight:bolder;
+	margin-top: 130vh;
+	z-index: 11;
+}
+
+p.titletext {
+	position: relative;
+	color: #f7f8e7;
+	text-align: center;
+	font-size: larger;
+	margin-top: 100vh;
+} 
+#stars {
+	width: 100%;
+	margin-left: 0
+}
+#land {
+	
+	z-index: 6;
+	margin-bottom: 0%;
+	margin-top: 15%;
+}
+
+#titleBackground{
 	position: relative;
 	width: 100%;
-	height: 600vh;
-	align-items: center;
+	height: 500vh;
+	margin-bottom: 50%;
 	display: flex;
-	margin-bottom: 50px;
-	padding-bottom: 50px;
+	overflow: hidden;
 }
 
-header:before {
-	content: '';
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	z-index: 5;
-}
-
-header:after {
+#titleBackground:after {
 	content: '';
 	position: absolute;
 	top: 0;
 	Left: 0;
 	width: 100%;
-	height: 100%;
+	height: 500vh;
+	z-index: 3;
 	background: linear-gradient(to top, rgba(253, 225, 191, 0.95) 15%, rgba(253, 225, 191, 0.5) 25%, rgba(18,37,56,0.17969194513742992) 35%, rgba(247,248,231,0) 40%);
 }
-header img{
+#titleBackground img{
 	position: absolute;
 	width: 100%;
 	pointer-events: none;
+	bottom: 0;
+	
 
 }
-#land {
-	margin-top: 175%;
-	z-index: 6;
-}
-#titleText{
-	position: absolute;
-	top: 8%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	margin-top:auto;
-}
-
 /* end title style */
 
+/* begin style for constellation graphic */
 
+.background {
+	position: absolute;
+	width: 100%;
+	opacity: 0;
+}
+
+#textRise {
+	position: relative;
+}
+.constrow {
+	margin-bottom: 100px;
+}
+
+#constbase{
+	opacity: 100;
+}
+p.constText {	
+	position: relative;
+	color: #f7f8e7;
+	text-align: center;
+	margin-bottom: 100vh;
+}
+
+/* end constellation graphic styling*/  
 
 
 p.vert-center{
