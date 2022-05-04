@@ -21,6 +21,7 @@ body,html {
 #sliderMap {
 	height: 100vh;
 	width: 100%;
+	
 }
 
 .slideLegend{
@@ -38,7 +39,6 @@ body,html {
 	padding: 10px;
 	border: solid gray 1px;
 }
-
 
 #finalMap {
 	height: 100vh;
@@ -93,7 +93,6 @@ p.titletext {
 	z-index: 11;
 }
 
-
 #stars {
 	width: 100%;
 	margin-left: 0
@@ -136,6 +135,7 @@ p.titletext {
 #drawing {
 width: 100%;
 }
+
 /* begin style for constellation graphic */
 
 .background {
@@ -147,6 +147,7 @@ width: 100%;
 #textRise {
 	position: relative;
 }
+
 .constrow {
 	margin-bottom: 100px;
 }
@@ -154,6 +155,7 @@ width: 100%;
 #constbase{
 	opacity: 100;
 }
+
 p.constText {	
 	position: relative;
 	color: #f7f8e7;
