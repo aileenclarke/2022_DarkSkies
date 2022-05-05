@@ -37,6 +37,7 @@ function createLocationMap(){
     zoomHome.addTo(locationMap);
 };
 
+
 // get user location
 function getLocation() {
     if (navigator.geolocation) {
@@ -197,24 +198,7 @@ function isInPosition(id, location, zoom){
     }
 }
 
-function IDAscroll(){
-//code for IDA points
-    document.querySelectorAll('.IDA-points').forEach(function(div){
-    // get element and element's property 'top'
-    var rect = div.getBoundingClientRect();
-    y = rect.top;
 
-    // set the top margin as a ratio of innerHeight
-    var topMargin = window.innerHeight;
-     // call setStyle when top of element is halfway up innerHeight
-     if ((y-topMargin) < 0 && y > 0){
-        IDApoints.setStyle(function(feature){
-            return style(feature, parseFloat(div.id))
-        });
-        document.querySelector('.yearLegend').innerHTML = div.id;
-    }
-    })
-}
 // CONSTELLATION IMAGE FADE
 function constScroll(){
     //code for first imamge
@@ -267,7 +251,49 @@ function scrollFade(){
       }
 }
 
-//Explorable Leaflet map
+
+
+
+
+
+
+
+//DARK SKY PLACES
+
+function IDAscroll(){
+    //code for IDA points
+    document.querySelectorAll('.IDA-points').forEach(function(div){
+        // get element and element's property 'top'
+        var rect = div.getBoundingClientRect();
+        y = rect.top;
+    
+        // set the top margin as a ratio of innerHeight
+        var topMargin = window.innerHeight;
+        // call setStyle when top of element is halfway up innerHeight
+        if ((y-topMargin) < 0 && y > 0){
+            IDApoints.setStyle(function(feature){
+                return style(feature, parseFloat(div.id))
+            });
+            document.querySelector('.yearLegend').innerHTML = div.id;
+        };
+    });
+    //code for IDA text
+    document.querySelectorAll('.IDA-text').forEach(function(div){
+        // get element and element's property 'top'
+        var rect = div.getBoundingClientRect();
+        y = rect.top;
+    
+        // set the top margin as a ratio of innerHeight
+        var topMargin = window.innerHeight / 2;
+        // call setStyle when top of element is halfway up innerHeight
+        if ((y-topMargin) < 0 && y > 0){
+            IDApoints.setStyle(function(feature){
+                return style(feature, div.id)
+            });
+        };
+    });
+};
+
 function createFinalMap(){
     //create the map
     finalMap = L.map('finalMap', {
@@ -357,52 +383,59 @@ function createYearLegend(){
 //dynamically change IDA point style
 function style(feature, divID){
     return {
-        //having issues with interactive option atm
-        interactive: true,
-        //interactive: interactiveFilter(feature.properties, divID),
         fillOpacity: opacityFilter(feature.properties, divID),
-        fillColor: colorFilter(feature.properties, divID)
+        fillColor: colorFilter(feature.properties, divID),
+        weight: strokeWeight(feature.properties, divID)
     }
 }
 
 //change IDA point opacity based on year
 function opacityFilter(props, divID){
-    if (parseFloat(props.Year) <= divID){
+    if (parseFloat(props.Year) <= divID || divID === "end"){
+        return 1
+    } else if (divID === "parks" && (props.Type === "Park" || props.Type === "Sanctuary" || props.Type === "Reserve")) {
+        return 1
+    } else if (divID === "communities" && props.Type === "Community"){
+        return 1
+    } else if (divID === "unsps" && props.Type === "Urban Night Sky Place"){
         return 1
     } else {
         return 0
     };
 };
 
-function interactiveFilter(props, divID){
-    return true
-    
-    /*if (parseFloat(props.Year) <= divID){
-        return true
-    } else {
-        return false
-    };*/
-};
-
-
 //change IDApoint color based on type of IDA place
 function colorFilter(props, divID){
-    if (props.Type === "Park" || props.Type === "Sanctuary" || props.Type === "Reserve") {
+    if((divID === "parks" || divID === "end") && (props.Type === "Park" || props.Type === "Sanctuary" || props.Type === "Reserve")){
         return "#FAE450"
-    } else if (props.Type === "Community") {
+    } else if ((divID === "communities" || divID === "end") && props.Type === "Community"){
         return "#f8961e"
-    } else {
+    } else if ((divID === "unsps" || divID === "end") && props.Type === "Urban Night Sky Place"){
         return "#f94144"
-    };
+    } else {
+        return "#f1faee"
+    }
 };
 
+
+function strokeWeight(props, divID){
+    if (parseFloat(props.Year) <= divID || divID === "end"){
+        return 1
+    } else if (divID === "parks" && (props.Type === "Park" || props.Type === "Sanctuary" || props.Type === "Reserve")) {
+        return 1
+    } else if (divID === "communities" && props.Type === "Community"){
+        return 1
+    } else if (divID === "unsps" && props.Type === "Urban Night Sky Place"){
+        return 1
+    } else {
+        return 0
+    };
+}
 
 //function to convert markers to circle markers
 function pointToLayer(feature, latlng){
    //create marker options
-   //sort data into two colors based on status
        var options = {
-           fillColor: "#FF544B",
            color: "#000",
            weight: 0,
            opacity: 1,
