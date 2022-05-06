@@ -170,14 +170,14 @@ var fly= [
         location:[30.27, -97.74],
         zoom: 8
     }
-]
+];
 
 // function to trigger flyTo on scroll
 function scroll(){
     fly.forEach(function(item){
         isInPosition(item.id, item.location, item.zoom)
-    })
-}
+    });
+};
 
 function isInPosition(id, location, zoom){
     
@@ -195,11 +195,53 @@ function isInPosition(id, location, zoom){
             animate: true,
             duration: 2 // in seconds
         });
-    }
-}
+    };
+};
 
+// CONSTELLATION FADE
+// create array containing flyTo locations
+var constellation= [
+    {
+        id:"fade1",
+        src: "img/constsleep.png"
+    },
+    {
+        id:"fade2",
+        src: "img/constturt.png"
+    },
+    {
+        id:"fade3",
+        src: "img/constbase.png"
+    }
+];
+
+// function to trigger flyTo on scroll
+function constScroll(){
+    constellation.forEach(function(item){
+        constIsInPosition(item.id, item.src)
+    });
+};
+
+function constIsInPosition(id, src){
+    
+    // get element and element's property 'top'
+    var constText = document.getElementById(id);
+    var rect = constText.getBoundingClientRect();
+    y = rect.top;
+
+    // set the top margin as a ratio of innerHeight
+    var topMargin = window.innerHeight / 2;
+
+    // call flyTo when top of element is halfway up innerHeight
+    if ((y-topMargin) < 0 && y > 0){
+        console.log(document.querySelector("#constAustin").src)    
+        document.querySelector("#constAustin").src=src
+    };
+};
 
 // CONSTELLATION IMAGE FADE
+
+/*
 function constScroll(){
     //code for first imamge
         document.querySelectorAll('#constfade1').forEach(function(div){
@@ -250,12 +292,7 @@ function scrollFade(){
         imageFade.style.opacity = opacity;
       }
 }
-
-
-
-
-
-
+*/
 
 
 //DARK SKY PLACES
@@ -458,3 +495,4 @@ document.addEventListener('scroll', scroll)
 //document.addEventListener('scroll', scrollFade)
 document.addEventListener('scroll', IDAscroll)
 //document.addEventListener('scroll', scrollLocation)
+document.addEventListener('scroll', constScroll)
