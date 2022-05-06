@@ -50,7 +50,7 @@ function noLocation() {
     var lat = 39.71;
     var long = -105.06;
     locations = createArray(lat, long);
-    //scrollLocation(null, locations);
+    scrollLocation(null, locations);
 };
 
 // set lat long if user allows location access
@@ -143,14 +143,38 @@ function createSliderMap(){
             position: "bottomleft"
         },
         onAdd:function(){
-            var sliderContainer = L.DomUtil.create('div','legend-control-container');
+            var sliderContainer = L.DomUtil.create('div','legend-control-container1');
             sliderContainer.innerHTML = '<p class="slideLegend">More Stars</p>';
             var svg = '<svg id="attribute-legend" width="250" height="25"><style>.c{fill:url(#b);}</style><linearGradient id="b" x1="0" y1="9.38215" x2="187.18535" y2="9.38215" gradientTransform="matrix(1, 0, 0, 1, 0, 0)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0c1c2c"/><stop offset="1" stop-color="#f7f8e8"/></linearGradient></defs><rect class="c" width="187.18535" height="18.7643"/>';
             sliderContainer.insertAdjacentHTML('beforeend',svg)
             return sliderContainer;
         }
     });
-    sliderMap.addControl(new sliderLegend());  
+    sliderMap.addControl(new sliderLegend()); 
+
+    var year1Legend = L.Control.extend({
+        options: {
+            position: "topleft"
+        },
+        onAdd:function(){
+            var sliderContainer = L.DomUtil.create('div','legend-control-container');
+            sliderContainer.innerHTML = '<p class="year1Legend">2006</p>';
+            return sliderContainer;
+        }
+    });
+    sliderMap.addControl(new year1Legend());
+
+    var year2Legend = L.Control.extend({
+        options: {
+            position: "topright"
+        },
+        onAdd:function(){
+            var sliderContainer = L.DomUtil.create('div','legend-control-container');
+            sliderContainer.innerHTML = '<p class="year2Legend">2020</p>';
+            return sliderContainer;
+        }
+    });
+    sliderMap.addControl(new year2Legend());
 };
 
 // create array containing flyTo locations
@@ -162,13 +186,13 @@ var fly= [
     },
     {
         id:"block1",
-        location:[48.15, -103.62],
+        location:[48.00, -103.42],
         zoom: 8
     },
     {
         id:"block2",
-        location:[30.27, -97.74],
-        zoom: 8
+        location:[29.78, -95.36],
+        zoom: 9
     }
 ];
 
@@ -494,5 +518,5 @@ document.addEventListener('DOMContentLoaded', createFinalMap)
 document.addEventListener('scroll', scroll)
 //document.addEventListener('scroll', scrollFade)
 document.addEventListener('scroll', IDAscroll)
-//document.addEventListener('scroll', scrollLocation)
+document.addEventListener('scroll', scrollLocation)
 document.addEventListener('scroll', constScroll)
