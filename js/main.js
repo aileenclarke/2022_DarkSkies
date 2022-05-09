@@ -328,6 +328,7 @@ function IDAscroll(){
         // get element and element's property 'top'
         var rect = div.getBoundingClientRect();
         y = rect.top;
+        var id;
     
         // set the top margin as a ratio of innerHeight
         var topMargin = window.innerHeight;
@@ -336,7 +337,13 @@ function IDAscroll(){
             IDApoints.setStyle(function(feature){
                 return style(feature, parseFloat(div.id))
             });
-            document.querySelector('.yearLegend').innerHTML = div.id;
+            if (toString(div.id) === "start" || toString(div.id) === "end"){
+                id = 1
+            } else {
+                id = div.id
+            };
+            document.querySelector('.yearLegend').innerHTML = id
+    
         };
     });
     //code for IDA text
@@ -373,9 +380,7 @@ function createFinalMap(){
             [15, -45]
             ]
     });
-    //adds zoom buttons back to top left
-    //L.control.zoom({position:'topleft'}).addTo(finalMap);
-    
+
     // add zoom with home button
     var zoomHome = L.Control.zoomHome({position:'bottomright'});
     zoomHome.addTo(finalMap);
@@ -434,7 +439,7 @@ function createYearLegend(){
             var container = L.DomUtil.create('div', 'legend-year');
             
             //legend title
-            container.innerHTML = '<p class="yearLegend">2007</span></p>';
+            container.innerHTML = '<p class="yearLegend"></span></p>';
 
             return container;
         }
@@ -447,7 +452,8 @@ function style(feature, divID){
     return {
         fillOpacity: opacityFilter(feature.properties, divID),
         fillColor: colorFilter(feature.properties, divID),
-        weight: strokeWeight(feature.properties, divID)
+        weight: weightFilter(feature.properties, divID),
+        color: strokeFilter(feature.properties, divID)
     }
 }
 
@@ -475,12 +481,12 @@ function colorFilter(props, divID){
     } else if ((divID === "unsps" || divID === "end") && props.Type === "Urban Night Sky Place"){
         return "#f94144"
     } else {
-        return "#f1faee"
+        return "#141414"
     }
 };
 
 
-function strokeWeight(props, divID){
+function weightFilter(props, divID){
     if (parseFloat(props.Year) <= divID || divID === "end"){
         return 1
     } else if (divID === "parks" && (props.Type === "Park" || props.Type === "Sanctuary" || props.Type === "Reserve")) {
@@ -493,6 +499,19 @@ function strokeWeight(props, divID){
         return 0
     };
 }
+
+function strokeFilter(props, divID){
+    if((divID === "parks" || divID === "end") && (props.Type === "Park" || props.Type === "Sanctuary" || props.Type === "Reserve")){
+        return "#776704"
+    } else if ((divID === "communities" || divID === "end") && props.Type === "Community"){
+        return "#8B4E04"
+    } else if ((divID === "unsps" || divID === "end") && props.Type === "Urban Night Sky Place"){
+        return "#8B0407"
+    } else {
+        return "#F5F5F5"
+    }
+};
+
 
 //function to convert markers to circle markers
 function pointToLayer(feature, latlng){
