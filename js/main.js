@@ -5,7 +5,6 @@ var locationMap;
 
 // leaflet side-by-side
 var sliderMap;
-var sliderZoomHome;
 
 //Explorable Leaflet map at the end.
 var finalMap;
@@ -36,23 +35,21 @@ function createLocationMap(){
     
     var zoomHome = L.Control.zoomHome({position:'bottomright'});
     zoomHome.addTo(locationMap);
+
+    var locLegend = L.Control.extend({
+        options: {
+            position: "bottomleft"
+        },
+        onAdd:function(){
+            var locContainer = L.DomUtil.create('div','legend-control-container1');
+            var svg = '<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 260 55"><defs><style>.d{letter-spacing:-.015em;}.e{font-size:9px;}.e,.f{fill:#0f1031;font-family:AstoriaSans-Roman, Astoria Sans;}.g{fill:url(#c);}.h{letter-spacing:-.01004em;}.i{letter-spacing:.02002em;}.j{letter-spacing:-.01998em;}.f{font-size:11px;}.k{letter-spacing:-.01997em;}</style><linearGradient id="c" x1="13.02934" y1="27.5" x2="246.97012" y2="27.5" gradientTransform="matrix(1, 0, 0, 1, 0, 0)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0c1c2c"/><stop offset="1" stop-color="#f7f8e8"/></linearGradient></defs><g id="a"/><g id="b"><g><rect class="g" x="13.02934" y="18.11785" width="233.94077" height="18.7643"/><text class="f" transform="translate(99.91502 14.51568)"><tspan x="0" y="0">Visible S</tspan><tspan class="i" x="41.46924" y="0">t</tspan><tspan x="45.83643" y="0">a</tspan><tspan class="d" x="51.21533" y="0">r</tspan><tspan x="55.65918" y="0">s</tspan></text><text class="f" transform="translate(48.00135 48.13983)"><tspan x="0" y="0">Magnitude per Squa</tspan><tspan class="j" x="98.88916" y="0">r</tspan><tspan x="103.27832" y="0">e A</tspan><tspan class="j" x="119.96484" y="0">r</tspan><tspan x="124.354" y="0">csecond</tspan></text><text class="e" transform="translate(230.29321 15.03096)"><tspan class="h" x="0" y="0">L</tspan><tspan x="4.57178" y="0">ess</tspan></text><text class="e" transform="translate(13.02946 15.03084)"><tspan x="0" y="0">Mo</tspan><tspan class="k" x="12.93262" y="0">r</tspan><tspan x="16.52393" y="0">e</tspan></text><text class="e" transform="translate(225.65903 48.65596)"><tspan x="0" y="0">17.80</tspan></text><text class="e" transform="translate(13.02921 48.65584)"><tspan x="0" y="0">22.00</tspan></text></g></g></svg>'
+            locContainer.insertAdjacentHTML('beforeend',svg)
+            return locContainer;
+        }
+    });
+    locationMap.addControl(new locLegend());
 };
 
-/*
-var clicked = false;
-function check(){
-    if (clicked === true){
-        if (id === "buttonYes"){ // query selector id
-            getLocation()
-        } else if (id === "buttonNo"){
-            noLocation()
-        }
-    }
-    if (clicked === false) {
-        noLocation()
-    };
-};
-*/   
 
 // get user location
 function getLocation() {
@@ -69,15 +66,13 @@ function noLocation() {
     scrollLocation(null, locations);
 };
 
-
-
    // set lat long if user allows location access
 function saveLocation(position) {
     var lat = position.coords.latitude;
     var long = position.coords.longitude;
     locations = createArray(lat, long);
     scrollLocation(null, locations);
-}
+};
 
 // array containing locations
 function createArray(lat,long){
@@ -162,7 +157,6 @@ function createSliderMap(){
         },
         onAdd:function(){
             var sliderContainer = L.DomUtil.create('div','legend-control-container1');
-            //var svg = '<svg id="attribute-legend" width="250" height="25"><style>.c{fill:url(#b);}</style><linearGradient id="b" x1="0" y1="9.38215" x2="187.18535" y2="9.38215" gradientTransform="matrix(1, 0, 0, 1, 0, 0)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0c1c2c"/><stop offset="1" stop-color="#f7f8e8"/></linearGradient></defs><rect class="c" width="187.18535" height="18.7643"/>';
             var svg = '<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 260 55"><defs><style>.d{letter-spacing:-.015em;}.e{font-size:9px;}.e,.f{fill:#0f1031;font-family:AstoriaSans-Roman, Astoria Sans;}.g{fill:url(#c);}.h{letter-spacing:-.01004em;}.i{letter-spacing:.02002em;}.j{letter-spacing:-.01998em;}.f{font-size:11px;}.k{letter-spacing:-.01997em;}</style><linearGradient id="c" x1="13.02934" y1="27.5" x2="246.97012" y2="27.5" gradientTransform="matrix(1, 0, 0, 1, 0, 0)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0c1c2c"/><stop offset="1" stop-color="#f7f8e8"/></linearGradient></defs><g id="a"/><g id="b"><g><rect class="g" x="13.02934" y="18.11785" width="233.94077" height="18.7643"/><text class="f" transform="translate(99.91502 14.51568)"><tspan x="0" y="0">Visible S</tspan><tspan class="i" x="41.46924" y="0">t</tspan><tspan x="45.83643" y="0">a</tspan><tspan class="d" x="51.21533" y="0">r</tspan><tspan x="55.65918" y="0">s</tspan></text><text class="f" transform="translate(48.00135 48.13983)"><tspan x="0" y="0">Magnitude per Squa</tspan><tspan class="j" x="98.88916" y="0">r</tspan><tspan x="103.27832" y="0">e A</tspan><tspan class="j" x="119.96484" y="0">r</tspan><tspan x="124.354" y="0">csecond</tspan></text><text class="e" transform="translate(230.29321 15.03096)"><tspan class="h" x="0" y="0">L</tspan><tspan x="4.57178" y="0">ess</tspan></text><text class="e" transform="translate(13.02946 15.03084)"><tspan x="0" y="0">Mo</tspan><tspan class="k" x="12.93262" y="0">r</tspan><tspan x="16.52393" y="0">e</tspan></text><text class="e" transform="translate(225.65903 48.65596)"><tspan x="0" y="0">17.80</tspan></text><text class="e" transform="translate(13.02921 48.65584)"><tspan x="0" y="0">22.00</tspan></text></g></g></svg>'
             sliderContainer.insertAdjacentHTML('beforeend',svg)
             return sliderContainer;
@@ -505,7 +499,8 @@ document.addEventListener('DOMContentLoaded', createLocationMap)
 document.addEventListener('DOMContentLoaded', createSliderMap)
 document.addEventListener('DOMContentLoaded', createFinalMap)
 document.addEventListener('scroll', scroll)
-//document.addEventListener('scroll', scrollFade)
+document.addEventListener('DOMContentLoaded', noLocation)
 document.addEventListener('scroll', IDAscroll)
 document.addEventListener('scroll', scrollLocation)
 document.addEventListener('scroll', constScroll)
+//document.addEventListener('scroll', callLocator)
