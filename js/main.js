@@ -24,7 +24,7 @@ function createLocationMap(){
         center: [39,-96],
         zoom: 5,
         maxZoom: 12,
-        minZoom: 4,
+        minZoom: 5,
         scrollWheelZoom: false,
         zoomControl: false});
 
@@ -136,7 +136,7 @@ function createSliderMap(){
         center: [39,-96],
         zoom: 5,
         maxZoom: 12,
-        minZoom: 4,
+        minZoom: 5,
         scrollWheelZoom: false,
         zoomControl: false});
 
@@ -350,7 +350,7 @@ function createFinalMap(){
         center: [39,-96],
         zoom: 5,
         maxZoom: 12,
-        minZoom: 4,
+        minZoom: 5,
         scrollWheelZoom: false,
         //needed to get rid zoom in order to move it 
         zoomControl:false,
@@ -358,7 +358,7 @@ function createFinalMap(){
         maxBounds: [
             [60, -155],
             [15, -45]
-            ]
+            ],
     });
 
     // add zoom with home button
