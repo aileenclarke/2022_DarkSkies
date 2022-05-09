@@ -269,7 +269,9 @@ p.titletext {
 	opacity: 0;
 }
 
-
+#fade0{
+	background-color:rgba(255,255,255,0)
+}
 
 /* end constellation graphic styling*/  
 
