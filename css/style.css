@@ -6,6 +6,16 @@ html {
 body,html {
 	margin: 0;
 	font-family: 'EB Garamond', serif;
+	
+}
+
+.foreground-item{
+    font-size: 1.45em;
+}
+
+#sources {
+	font-family: 'Cabin', sans-serif;
+	margin-top: 100vh;
 }
 
 #map1{
@@ -17,6 +27,34 @@ body,html {
 	background: linear-gradient(to top,  #0c1427, transparent);
 	z-index: 25;
 }
+
+#locRequest1{
+	font-size: 2em;
+}
+
+#locRequest2{
+	font-size: 1.5em;
+}
+
+.button {
+	background-color: rgba(255,255,255,0.8);
+	border: none;
+	color: #0c1427;
+	padding: 14px 40px;
+	font-family: 'Cabin', sans-serif;
+	border-radius: 2px;
+	font-size: 16px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	transition-duration: 0.4s
+}
+
+.button:hover {
+	background-color: rgba(255,255,255); 
+	color: #0c1427;
+  }
 
 #locationMap {
 	height: 100vh;
@@ -40,30 +78,41 @@ body,html {
 	/*margin-bottom: 5%;*/
 	margin: 5%;
 	margin-left: 0 !important;
+	background: none;
+	margin-bottom: 50vh
 }
 
-.slideLegend{
-	margin-top: 0px !important;
-	margin-bottom: 5px;
-	font-size: .75em;
-}
 
 .legend-control-container1 {
 	width:300px;
-	height: 50px;
-	font-weight: bold;
-	font-size: large;
+	height: 60px;
+	font-family: 'astoria-sans', sans-serif;
+	font-weight: 400;
+	font-style: normal;
 	background-color: rgba(255,255,255,0.8);
 	padding: 10px;
-	border: solid gray 1px;
+	border-radius: 2px;
+}
+
+text.f{
+	font-family: 'astoria-sans', sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+text.e{
+	font-family: 'astoria-sans', sans-serif;
+	font-weight: 400;
+	font-style: normal;
 }
 
 .legend-control-container .year2Legend {
 	width:100px;
 	height: 50px;
 	font-weight: bold;
-	font-size: 4em;
+	font-size: 3em;
 	color:aliceblue;
+	font-family: 'Cabin', sans-serif;
 	padding: 10px;
 	margin: 0px;
 }
@@ -72,7 +121,8 @@ body,html {
 	width:100px;
 	height: 50px;
 	font-weight: bold;
-	font-size: 4em;
+	font-size: 3em;
+	font-family: 'Cabin', sans-serif;
 	color:aliceblue;
 	padding: 10px;
 	margin: 0px;
@@ -89,21 +139,23 @@ body,html {
 	/*margin-bottom: 5%;*/
 	margin: 5%;
 	margin-left: 0 !important;
+	margin-top: 50vh;
 }
 
 .legend-year {
-	width: 70px;
-	height: 40px;
+	width:100px;
+	height: 50px;
 	font-weight: bold;
-	font-size: large;
-	background-color: rgba(255,255,255,0.8);
+	font-size: 3em;
+	font-family: 'Cabin', sans-serif;
+	color:aliceblue;
 	padding: 10px;
-	border: solid gray 1px;
+	margin: 0px;
 }
 
 .yearLegend {
 	margin-top: 0px !important;
-	font-size:24pt;
+	font-size:1.9em;
 }
 
 /* drawing graphic styling */
@@ -128,6 +180,7 @@ p.titletext {
 	text-align: center;
 	font-size: larger;
 	font-size: 24pt;
+	margin-top:50vh;
 } 
 
 #edison {
@@ -203,6 +256,8 @@ p.titletext {
 	opacity: 0;
 }
 
+
+
 /* end constellation graphic styling*/  
 
 
@@ -212,7 +267,7 @@ p.vert-center{
 }
 
 h1{
-	font-size: 4em;
+	font-size: 24pt;
 	color: aliceblue;
 }
 
