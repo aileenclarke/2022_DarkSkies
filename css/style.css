@@ -114,6 +114,7 @@ text.e{
 	font-family: 'Cabin', sans-serif;
 	padding: 10px;
 	margin: 0px;
+	text-shadow: 0 0 4px #0c1427;
 }
 
 .legend-control-container .year1Legend {
@@ -125,6 +126,7 @@ text.e{
 	color:aliceblue;
 	padding: 10px;
 	margin: 0px;
+	text-shadow: 0 0 4px #0c1427;
 }
 
 /*end style slider map*/
@@ -155,6 +157,7 @@ text.e{
 .yearLegend {
 	margin-top: 0px !important;
 	font-size:1.9em;
+	text-shadow: 0 0 4px #0c1427;
 }
 
 /* drawing graphic styling */
