@@ -293,7 +293,7 @@ function constIsInPosition(id, src){
 
 function IDAscroll(){
     //code for IDA points
-    document.querySelectorAll('.IDA-points').forEach(function(div){
+    document.querySelectorAll('.IDA-points, .IDA-text').forEach(function(div){
         // get element and element's property 'top'
         var rect = div.getBoundingClientRect();
         y = rect.top;
@@ -306,12 +306,22 @@ function IDAscroll(){
             IDApoints.setStyle(function(feature){
                 return style(feature, parseFloat(div.id))
             });
-            if (toString(div.id) === "start" || toString(div.id) === "end"){
-                id = 1
+            if (div.id === "start" || div.id === "parks" || div.id === "communities" || div.id === "unsps" || div.id === "end"){
+                id = ''
             } else {
                 id = div.id
             };
             document.querySelector('.yearLegend').innerHTML = id;
+            if (div.id === "end"){
+            document.querySelectorAll(".leaflet-interactive").forEach(function(point){
+                    point.style.pointerEvents = "auto"
+            })
+            }
+            else{
+                document.querySelectorAll(".leaflet-interactive").forEach(function(point){
+                    point.style.pointerEvents = "none"
+            })  
+            }
     
         };
     });
@@ -328,6 +338,7 @@ function IDAscroll(){
             IDApoints.setStyle(function(feature){
                 return style(feature, div.id)
             });
+            
         };
     });
 };
@@ -491,7 +502,7 @@ function pointToLayer(feature, latlng){
            opacity: 1,
            fillOpacity: 0.7,
            radius: 5,
-           interactive: false
+           className:'point'
        };
 
        //create circle marker layer   
