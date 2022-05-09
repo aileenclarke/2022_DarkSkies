@@ -342,7 +342,7 @@ function IDAscroll(){
             } else {
                 id = div.id
             };
-            document.querySelector('.yearLegend').innerHTML = id
+            document.querySelector('.yearLegend').innerHTML = id;
     
         };
     });
