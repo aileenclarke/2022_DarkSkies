@@ -38,6 +38,21 @@ function createLocationMap(){
     zoomHome.addTo(locationMap);
 };
 
+/*
+var clicked = false;
+function check(){
+    if (clicked === true){
+        if (id === "buttonYes"){ // query selector id
+            getLocation()
+        } else if (id === "buttonNo"){
+            noLocation()
+        }
+    }
+    if (clicked === false) {
+        noLocation()
+    };
+};
+*/   
 
 // get user location
 function getLocation() {
@@ -54,7 +69,9 @@ function noLocation() {
     scrollLocation(null, locations);
 };
 
-// set lat long if user allows location access
+
+
+   // set lat long if user allows location access
 function saveLocation(position) {
     var lat = position.coords.latitude;
     var long = position.coords.longitude;
@@ -213,19 +230,25 @@ function isInPosition(id, location, zoom){
 
     // set the top margin as a ratio of innerHeight
     var topMargin = window.innerHeight / 2;
+    
+
 
     // call flyTo when top of element is halfway up innerHeight
     if ((y-topMargin) < 0 && y > 0){
         sliderMap.flyTo(location, zoom, {
             animate: true,
             duration: 2 // in seconds
-        });
+        })
     };
 };
 
 // CONSTELLATION FADE
 // create array containing flyTo locations
 var constellation= [
+    {
+        id:"fade0",
+        src: "img/constbase.png"
+    },
     {
         id:"fade1",
         src: "img/constsleep.png"
@@ -264,60 +287,6 @@ function constIsInPosition(id, src){
     };
 };
 
-// CONSTELLATION IMAGE FADE
-
-/*
-function constScroll(){
-    //code for first imamge
-        document.querySelectorAll('#constfade1').forEach(function(div){
-        // get element and element's property 'top'
-        var rect = div.getBoundingClientRect();
-        y = rect.top;
-    
-        // set the top margin as a ratio of innerHeight
-        var topMargin = window.innerHeight;
-         // call setStyle when top of element is halfway up innerHeight
-         if ((y-topMargin) < 0 && y > 0){
-            constfade1.setStyle(function(feature){
-                return{
-                    opacity: constFade(div.id)
-                }
-            });
-        }
-        })
-    }
-
-// IMAGE FADE
-
-// function to trigger fade on scroll
-function scrollFade(){
-    
-    // get element and element's property 'top'
-    var imageFade = document.getElementById("imageFade");
-    var rect = imageFade.getBoundingClientRect();
-    y = rect.top;
-    
-    // set the top margin as a ratio of innerHeight
-    var topMargin = window.innerHeight / 4;
-
-    // element height
-    var elementHeight = imageFade.offsetHeight;
-
-    // number of px the element is scrolled vertically
-    var scrollTop = document.documentElement.scrollTop;
-    
-    //initialize opacity
-    var opacity = 1;
-    
-    // if scrollTop > topMargin, start fading out
-    if (scrollTop > topMargin) {
-          opacity = 1 - (scrollTop - topMargin) / elementHeight;
-      }
-    if (opacity >= 0) {
-        imageFade.style.opacity = opacity;
-      }
-}
-*/
 
 
 //DARK SKY PLACES

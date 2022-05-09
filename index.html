@@ -63,8 +63,8 @@
                 <div class="center">
                     <p class="vert-center" id="locRequest1">How bright is your neighborhood?</p>
                     <p class="vert-center" id="locRequest2">Share your location?</p>
-                    <button class="button" class="vert-center" onclick="getLocation()">Yes</button>
-                    <button class="button" class="vert-center" onclick="noLocation()">No, thanks</button>
+                    <button class="button" class="vert-center" id="buttonYes" onclick="getLocation()">Yes</button>
+                    <button class="button" class="vert-center" id="buttonNo"  onclick="noLocation()">No thanks</button>
                     <p id="demo"></p>
                 </div>
             </div>
@@ -136,10 +136,13 @@
             </div>
             <div class="scroll-container sm-margin">
                 <div class="background-item">
-                    <img class="background" id="constAustin" src="img/constbase.png">
+                    <img class="background" id="constAustin">
                 </div>
                 <div class="foreground-item">
                     <div class="row">
+                        <div class="const-text center background-transparent" id="fade0">
+                                <p class="no-margin">
+                        </div>
                         <div class="const-text center background-transparent" id="fade1">
                             <p class="no-margin">We rely on the release of melatonin to regulate the
                                 sleep-wake cycle, also known as the circadian rhythm.</p>
@@ -307,7 +310,8 @@
             </div>
         </div>
                        
-        <!--external script links-->        
+        <!--external script links-->      
+          
         <script type="text/javascript" src="dist/scrollmap.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
         <script type="text/javascript" src="lib/leaflet/leaflet.js"></script>
