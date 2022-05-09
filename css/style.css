@@ -184,8 +184,9 @@ p.titletext {
 	text-shadow: 0 0 4px #0c1427;
 } 
 
-#streetlights {
+#maintext {
 	margin-top:100vh;
+	font-weight:400;
 }
 
 #edison {
