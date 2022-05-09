@@ -22,6 +22,11 @@ body,html {
 	margin-bottom: 50%;
 }
 
+#locAsk{
+	margin-top: 75vh;
+	margin-bottom: 75vh;
+}
+
 #locRequest1{
 	font-size: 2em;
 }
@@ -73,7 +78,7 @@ body,html {
 	margin: 5%;
 	margin-left: 0 !important;
 	background: none;
-	margin-bottom: 50vh
+	margin-bottom: 100vh
 }
 
 
@@ -133,7 +138,7 @@ text.e{
 	/*margin-bottom: 5%;*/
 	margin: 5%;
 	margin-left: 0 !important;
-	margin-top: 50vh;
+	margin-top: 100vh;
 }
 
 .legend-year {
@@ -178,6 +183,10 @@ p.titletext {
 	margin-bottom: 100vh;
 	text-shadow: 0 0 4px #0c1427;
 } 
+
+#streetlights {
+	margin-top:100vh;
+}
 
 #edison {
 	position: relative;
