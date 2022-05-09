@@ -243,7 +243,6 @@ p.titletext {
 	height: 300vh;
 	pointer-events: none;
 	object-fit: cover;
-	bottom: 0;
 }
 
 /* end title style */
