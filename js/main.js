@@ -276,7 +276,6 @@ function constIsInPosition(id, src){
 
     // call flyTo when top of element is halfway up innerHeight
     if ((y-topMargin) < 0 && y > 0){
-        console.log(document.querySelector("#constAustin").src)    
         document.querySelector("#constAustin").src=src
     };
 };
@@ -391,6 +390,7 @@ function getData(){
             IDApoints.setStyle(style);
             //create a year legend
             createYearLegend();
+            //createPointLegend();
         });
 };
 
@@ -420,6 +420,20 @@ function createYearLegend(){
     });
     finalMap.addControl(new LegendControl());
 };
+/*
+function createPointLegend(){
+    var pointLegend = L.Control.extend({
+        options: {
+            position: "bottomleft"
+        },
+        onAdd:function(){
+            var pointContainer = L.DomUtil.create('div','legend-control-container2');
+            pointContainer.insertAdjacentHTML('beforeend')
+            return pointContainer;
+        }
+    });
+    finalMap.addControl(new pointLegend());
+}*/
 
 //dynamically change IDA point style
 function style(feature, divID){
