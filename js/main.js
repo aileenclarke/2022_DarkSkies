@@ -1,4 +1,4 @@
-//insert code here!
+
 
 // locator map
 var locationMap;
@@ -6,10 +6,10 @@ var locationMap;
 // leaflet side-by-side
 var sliderMap;
 
-//Explorable Leaflet map at the end.
+// explorable final map
 var finalMap;
 
-//IDA points layer
+// IDA points layer
 var IDApoints;
 
 // location data for locator map
@@ -51,14 +51,14 @@ function createLocationMap(){
 };
 
 
-// get user location
+// get user location if user selects yes button
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(saveLocation);
     };
 };
 
-// set lat long if user denies location access
+// set lat long if user denies location access or does not click either button
 function noLocation() { 
     var lat = 39.71;
     var long = -105.06;
@@ -66,7 +66,7 @@ function noLocation() {
     scrollLocation(null, locations);
 };
 
-   // set lat long if user allows location access
+// set lat long if user allows location access
 function saveLocation(position) {
     var lat = position.coords.latitude;
     var long = position.coords.longitude;
@@ -224,20 +224,18 @@ function isInPosition(id, location, zoom){
 
     // set the top margin as a ratio of innerHeight
     var topMargin = window.innerHeight / 2;
-    
-
 
     // call flyTo when top of element is halfway up innerHeight
     if ((y-topMargin) < 0 && y > 0){
         sliderMap.flyTo(location, zoom, {
             animate: true,
             duration: 2 // in seconds
-        })
+        });
     };
 };
 
 // CONSTELLATION FADE
-// create array containing flyTo locations
+// create array containing images
 var constellation= [
     {
         id:"fade0",
@@ -257,7 +255,7 @@ var constellation= [
     }
 ];
 
-// function to trigger flyTo on scroll
+// function to trigger image switch on scroll
 function constScroll(){
     constellation.forEach(function(item){
         constIsInPosition(item.id, item.src)
@@ -274,12 +272,11 @@ function constIsInPosition(id, src){
     // set the top margin as a ratio of innerHeight
     var topMargin = window.innerHeight / 2;
 
-    // call flyTo when top of element is halfway up innerHeight
+    // change image when top of element is halfway up innerHeight
     if ((y-topMargin) < 0 && y > 0){
         document.querySelector("#constAustin").src=src
     };
 };
-
 
 
 //DARK SKY PLACES
@@ -314,10 +311,10 @@ function IDAscroll(){
                 document.querySelectorAll(".leaflet-interactive").forEach(function(point){
                     point.style.pointerEvents = "none"
             })  
-            }
-    
+            };
         };
     });
+
     //code for IDA text
     document.querySelectorAll('.IDA-text').forEach(function(div){
         // get element and element's property 'top'
@@ -331,7 +328,6 @@ function IDAscroll(){
             IDApoints.setStyle(function(feature){
                 return style(feature, div.id)
             });
-            
         };
     });
 };
@@ -418,6 +414,7 @@ function createYearLegend(){
             return container;
         }
     });
+    
     finalMap.addControl(new LegendControl());
 };
 /*
@@ -442,8 +439,8 @@ function style(feature, divID){
         fillColor: colorFilter(feature.properties, divID),
         weight: weightFilter(feature.properties, divID),
         color: strokeFilter(feature.properties, divID)
-    }
-}
+    };
+};
 
 //change IDA point opacity based on year
 function opacityFilter(props, divID){
@@ -470,7 +467,7 @@ function colorFilter(props, divID){
         return "#f94144"
     } else {
         return "#141414"
-    }
+    };
 };
 
 
@@ -486,7 +483,7 @@ function weightFilter(props, divID){
     } else {
         return 0
     };
-}
+};
 
 function strokeFilter(props, divID){
     if((divID === "parks" || divID === "end") && (props.Type === "Park" || props.Type === "Sanctuary" || props.Type === "Reserve")){
@@ -497,35 +494,35 @@ function strokeFilter(props, divID){
         return "#8B0407"
     } else {
         return "#F5F5F5"
-    }
+    };
 };
 
 
 //function to convert markers to circle markers
 function pointToLayer(feature, latlng){
    //create marker options
-       var options = {
-           color: "#000",
-           weight: 0,
-           opacity: 1,
-           fillOpacity: 0.7,
-           radius: 5,
-           className:'point'
-       };
+    var options = {
+        color: "#000",
+        weight: 0,
+        opacity: 1,
+        fillOpacity: 0.7,
+        radius: 5,
+        className:'point'
+    };
 
-       //create circle marker layer   
-       var layer = L.circleMarker(latlng, options);
+    //create circle marker layer   
+    var layer = L.circleMarker(latlng, options);
 
-       //return the circle marker to the L.geoJson pointToLayer option
-       return layer;
-   };
+    //return the circle marker to the L.geoJson pointToLayer option
+    return layer;
+};
+
 
 document.addEventListener('DOMContentLoaded', createLocationMap)
 document.addEventListener('DOMContentLoaded', createSliderMap)
 document.addEventListener('DOMContentLoaded', createFinalMap)
-document.addEventListener('scroll', scroll)
 document.addEventListener('DOMContentLoaded', noLocation)
+document.addEventListener('scroll', scroll)
 document.addEventListener('scroll', IDAscroll)
 document.addEventListener('scroll', scrollLocation)
 document.addEventListener('scroll', constScroll)
-//document.addEventListener('scroll', callLocator)
