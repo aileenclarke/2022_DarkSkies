@@ -32,10 +32,12 @@ function createLocationMap(){
 	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 	    subdomains: 'abcd',
     }).addTo(locationMap);   
-    
+
+    // add zoom and home buttons
     var zoomHome = L.Control.zoomHome({position:'bottomright'});
     zoomHome.addTo(locationMap);
 
+    // create legend control holding svg legend and add to map
     var locLegend = L.Control.extend({
         options: {
             position: "bottomleft"
@@ -148,9 +150,11 @@ function createSliderMap(){
     // compare two layers on map
     L.control.sideBySide(layer1, layer2).addTo(sliderMap);
     
+    // add zoom and home buttons
     var sliderZoomHome = L.Control.zoomHome({position:'bottomright'});
     sliderZoomHome.addTo(sliderMap);
 
+    // create legend control holding svg legend and add to map
     var sliderLegend = L.Control.extend({
         options: {
             position: "bottomleft"
@@ -164,6 +168,7 @@ function createSliderMap(){
     });
     sliderMap.addControl(new sliderLegend()); 
 
+    // create legend control to display data year on layer1
     var year1Legend = L.Control.extend({
         options: {
             position: "topleft"
@@ -176,6 +181,7 @@ function createSliderMap(){
     });
     sliderMap.addControl(new year1Legend());
 
+    // create legend control to display data year on layer2
     var year2Legend = L.Control.extend({
         options: {
             position: "topright"
