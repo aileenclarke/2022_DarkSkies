@@ -288,6 +288,7 @@ function IDAscroll(){
         var rect = div.getBoundingClientRect();
         y = rect.top;
         var id;
+        var legend;
     
         // set the top margin as a ratio of innerHeight
         var topMargin = window.innerHeight;
@@ -296,21 +297,34 @@ function IDAscroll(){
             IDApoints.setStyle(function(feature){
                 return style(feature, parseFloat(div.id))
             });
+
+            //conditional to change year legend
             if (div.id === "start" || div.id === "parks" || div.id === "communities" || div.id === "unsps" || div.id === "end"){
                 id = ''
             } else {
                 id = div.id
             };
             document.querySelector('.yearLegend').innerHTML = id;
+           
+            //conditional to change interactivity of IDA points
             if (div.id === "end"){
             document.querySelectorAll(".leaflet-interactive").forEach(function(point){
                     point.style.pointerEvents = "auto"
             })
             }
-            else{
+            else {
                 document.querySelectorAll(".leaflet-interactive").forEach(function(point){
                     point.style.pointerEvents = "none"
             })  
+            };
+            
+            //conditional to create IDA point legends
+            if (div.id === "end"){
+                legend = '<?xml version="1.0" encoding="UTF-8"?><svg id="a1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256.50608 94.39501"><defs><style>.b1{fill:#fff;}.c1{fill:#13203e;}.d1{font-family:AstoriaSans-Roman, Astoria Sans;font-size:12px;}.e1{fill:#f94144;stroke:#8b0407;}.e1,.f1,.g1{stroke-miterlimit:10;stroke-width:.5px;}.h1{letter-spacing:-.05001em;}.f1{fill:#f8961e;stroke:#8b4e04;}.g1{fill:#fae450;stroke:#776704;}</style></defs><rect class="b1" width="256.50608" height="94.39501"/><rect class="c1" x="15.73989" y="55.86713" width="18.64631" height="18.64631"/><circle class="e1" cx="25.06304" cy="65.19029" r="3.73414"/><text class="d1" transform="translate(42.82782 69.36725)"><tspan x="0" y="0">Urban Night Sky Place</tspan></text><rect class="c1" x="15.73989" y="37.22082" width="18.64631" height="18.64631"/><circle class="f1" cx="25.06304" cy="46.54398" r="3.73414"/><text class="d1" transform="translate(42.82782 50.72094)"><tspan x="0" y="0">Dark Sky Community</tspan></text><rect class="c1" x="15.73989" y="18.57451" width="18.64631" height="18.64631"/><circle class="g1" cx="25.06304" cy="27.89766" r="3.73414"/><text class="d1" transform="translate(42.82782 32.07463)"><tspan x="0" y="0">Dark Sky </tspan><tspan class="h1" x="51.14355" y="0">P</tspan><tspan x="57.56348" y="0">ark, Sanctuary or Reserve</tspan></text></svg>'
+                updatePointLegend(legend)
+            } else {
+                legend = ''
+                updatePointLegend(legend)
             };
         };
     });
@@ -386,7 +400,7 @@ function getData(){
             IDApoints.setStyle(style);
             //create a year legend
             createYearLegend();
-            //createPointLegend();
+            createPointLegend();
         });
 };
 
@@ -417,7 +431,7 @@ function createYearLegend(){
     
     finalMap.addControl(new LegendControl());
 };
-/*
+
 function createPointLegend(){
     var pointLegend = L.Control.extend({
         options: {
@@ -425,12 +439,15 @@ function createPointLegend(){
         },
         onAdd:function(){
             var pointContainer = L.DomUtil.create('div','legend-control-container2');
-            pointContainer.insertAdjacentHTML('beforeend')
             return pointContainer;
         }
     });
     finalMap.addControl(new pointLegend());
-}*/
+}
+
+function updatePointLegend(legend){
+    document.querySelector('.legend-control-container2').innerHTML = legend
+}
 
 //dynamically change IDA point style
 function style(feature, divID){
