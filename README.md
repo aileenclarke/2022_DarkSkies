@@ -48,7 +48,7 @@ Then, Juno sees a series of graphics depicting humans and wildlife as constellat
 | 2 | Image Compare Slider | Overlay: Objects. Display and compare the data over the same area, from two different years. |
 | 3 | Sanctuary Hover or Selection | "Retrieve: Object. Click a point representing a Dark Sky Space to see its name, size, year of designation in a pop up. |
 | 4 | Reset Button | Reexpress: Object. Allow user to reset slippy map to the relevant extent by clicking a home button. |
-| 5 | Location PermissionButtons | Buttons for user to click to agree to share location or to proceed without sharing location. |
+| 5 | Location Permission Buttons | Buttons for user to click to agree to share location or to proceed without sharing location. |
 
 
 #### Wireframes
