@@ -204,8 +204,8 @@ text.e{
 
 .righttext {
 	position: absolute;
-	top: 50%;
-	right: 2%;
+	top: 55%;
+	right: 8%;
 	color: #f7f8e7;
 	font-size: 16pt;
 }
@@ -298,21 +298,10 @@ p.titletext {
 	width: 100%;
 }
 
-.constrow {
-	margin-bottom: 100px;
+#constAustin {
+	translate: 0 -10%;
 }
 
-#constbase{
-	opacity: 100;
-}
-
-#constfade1 {
-	opacity: 0;
-}
-
-#constfade2 {
-	opacity: 0;
-}
 
 /* end constellation graphic styling*/  
 
