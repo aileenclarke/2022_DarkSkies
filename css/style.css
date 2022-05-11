@@ -232,22 +232,23 @@ p.titletext {
 	font-size: larger;
 	font-weight: bolder;
 	font-size: 24pt;
-	margin-bottom: 100vh;
-	text-shadow: 0 0 4px #0c1427;
+	margin-bottom:
+ 100vh;
+	text-shadow: 0 0 12px #0c1427;
 } 
-
 #maintext {
 	margin-top:100vh;
 	font-weight:400;
 }
 
 #closer {
+	margin-top: 50%;
 	position: relative;
-	color: white;
+	color: #f7f8e7;
 	font-size: 24pt;
-	font-weight:bolder;
 	z-index: 11;
-	text-shadow: 0 0 4px #0c1427;
+	text-shadow: 0 0 12px #02060e;
+	
 }
 
 #front {
