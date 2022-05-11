@@ -32,8 +32,8 @@
                 <div class="center">       
                     <p class ="titletext" id="opener">Since the dawn of time, humans have spent half their time under skies like these.</h>
                     <p class ="titletext">But today, 80% of people in North America can't see the Milky Way.</p>
-                    <p class ="titletext">Ninety-nine percent of the continent lives under skies that experience some level of light pollution.</p>
-                    <p class ="titletext" id="edison">The culprit: nighttime lights that have proliferated since the advent of the lightbulb.</p>
+                    <p class ="titletext">The culprit: nighttime lights that have proliferated since the advent of the lightbulb..</p>
+                    <p class ="titletext" id="closer">In many urban areas, only the brightest dozen stars can be seen, where thousands were once visible. </p>
                 </div>     
             </div>
         </div>
@@ -42,12 +42,13 @@
             <script type="text/javascript">
                 let stars = document.getElementById("stars");
                 let mtn = document.getElementById("land");
-                let text = document.getElementById("titleText");
+                let text = document.getElementById("closer");
                 window.addEventListener('scroll', function(){
                     var value = window.scrollY;
                     stars.style.top = value * 0.5 + 'px'
                     middle.style.top = value * 0.47 + 'px'
                     back.style.top = value * 0.52 + 'px'
+                    text.style.top = -value * 0.1 + 'px'
                 });
             </script>
         </div>
@@ -94,8 +95,17 @@
                         glow” effect.</p>
                 </div>
                 <div class="drawing">
-                    <img src="img/drawingtest2.png">
-                </div>
+                    <img src="img/drawing.png">
+                    <div class="lefttext">
+                        Unshieled fixtures emit light upwards as waste.
+                    </div>
+                    <div class="middletext">
+                        Other lights reflect off nearby surfaces.
+                    </div>
+                    <div class="righttext">
+                        Blue-white LEDs are generally several times brighter, <br> producing more light pollution.
+                    </div>
+                    </div>
                 <div class="row">
                     <p class="titletext center sm-margin" id="maintext">And it's getting brighter all the time.</p>
                 </div>
