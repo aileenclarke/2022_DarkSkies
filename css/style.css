@@ -173,10 +173,38 @@ text.e{
 }
 
 /* drawing graphic styling */
+.drawing {
+	display: block;
+	overflow-x: scroll;
+	z-index: 0;
+	position: relative;
 
-#drawing:before {
-	content: 'words being said';
 }
+
+.lefttext {
+	position: absolute;
+	top: 300px;
+	left: 175px;
+	color: #f7f8e7;
+	font-size: 24pt;
+}
+
+.middletext {
+	position: absolute;
+	top: 300px;
+	left: 50%;
+	color: #f7f8e7;
+	font-size: 24pt;
+}
+
+.righttext {
+	position: absolute;
+	top: 300px;
+	right: 175px;
+	color: #f7f8e7;
+	font-size: 24pt;
+}
+
 
 /* title sequence style */
 
