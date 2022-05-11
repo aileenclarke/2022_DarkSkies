@@ -188,26 +188,30 @@ text.e{
 
 .lefttext {
 	position: absolute;
-	top: 38%;
+	bottom: 57%;
 	left: 10%;
 	color: #f7f8e7;
 	font-size: 16pt;
+	max-width: 23%;
 }
 
 .middletext {
 	position: absolute;
-	top: 30%;
+	bottom: 65%;
 	left: 35%;
 	color: #f7f8e7;
 	font-size: 16pt;
+	max-width: 37%;
 }
 
 .righttext {
 	position: absolute;
-	top: 50%;
+	bottom: 40%;
 	right: 8%;
 	color: #f7f8e7;
 	font-size: 16pt;
+	max-width: 18%;
+	
 }
 
 
