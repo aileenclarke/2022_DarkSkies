@@ -188,7 +188,7 @@ text.e{
 
 .lefttext {
 	position: absolute;
-	top: 35%;
+	top: 38%;
 	left: 10%;
 	color: #f7f8e7;
 	font-size: 16pt;
@@ -204,7 +204,7 @@ text.e{
 
 .righttext {
 	position: absolute;
-	top: 55%;
+	top: 50%;
 	right: 8%;
 	color: #f7f8e7;
 	font-size: 16pt;
