@@ -287,6 +287,7 @@ function constIsInPosition(id, src){
 
 //DARK SKY PLACES
 
+//function to make things react to scrolling
 function IDAscroll(){
     //code for IDA points
     document.querySelectorAll('.IDA-points, .IDA-text').forEach(function(div){
@@ -352,6 +353,7 @@ function IDAscroll(){
     });
 };
 
+//generate the final map
 function createFinalMap(){
     //create the map
     finalMap = L.map('finalMap', {
@@ -406,6 +408,7 @@ function getData(){
             IDApoints.setStyle(style);
             //create a year legend
             createYearLegend();
+            //create an empty legend to load at the "end" html div
             createPointLegend();
         });
 };
@@ -438,6 +441,7 @@ function createYearLegend(){
     finalMap.addControl(new LegendControl());
 };
 
+//create blank legend for IDA points
 function createPointLegend(){
     var pointLegend = L.Control.extend({
         options: {
@@ -451,6 +455,7 @@ function createPointLegend(){
     finalMap.addControl(new pointLegend());
 }
 
+//updates IDA point legend to what the conditional passes through as legend
 function updatePointLegend(legend){
     document.querySelector('.legend-control-container2').innerHTML = legend
 }
@@ -493,7 +498,7 @@ function colorFilter(props, divID){
     };
 };
 
-
+//change IDApoint stroke weight based on type of IDA place
 function weightFilter(props, divID){
     if (parseFloat(props.Year) <= divID || divID === "end"){
         return 1
@@ -508,6 +513,7 @@ function weightFilter(props, divID){
     };
 };
 
+//change IDApoint stroke color based on type of IDA place
 function strokeFilter(props, divID){
     if((divID === "parks" || divID === "end") && (props.Type === "Park" || props.Type === "Sanctuary" || props.Type === "Reserve")){
         return "#776704"
